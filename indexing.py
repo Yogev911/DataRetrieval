@@ -17,8 +17,9 @@ for song in songs:
                 if word[-1:] == ',' or word[-1:] == ')' or word[-1:] == '(' or word[-1:] == '.': word = word[:-1]
                 if word[:1] == ',' or word[:1] == ')' or word[:1] == '(' or word[:1] == '.': word = word[1:]
                 if word not in index_dict:
-                    index_dict[word] = []
-                index_dict[word].append([song_counter, paragraph_counter, line_counter])
+                    index_dict[word] = 1
+                else:
+                    index_dict[word] += 1
             line_counter += 1
         paragraph_counter += 1
     song_counter += 1

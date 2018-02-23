@@ -29,16 +29,16 @@ def demo():
         return 'You are using POST'
     return render_template('index.html', output='hello')
 
-@app.route('/upload', methods=['GET', 'POST'])
-def set_json():
-    if request.method == 'POST':
-        file = request.files['file']
-        filename = file.filename
-        if allowed_file(filename):
-            return jsonify(parse_util.update_json_in_db(file))
-        return jsonify(json.dumps({'msg': 'are you trying to fuck up my server? send me only json/xls/xlsx files!'}))
-    else:
-        return jsonify(json.dumps({'msg': 'dude this is POST only!@'}))
+# @app.route('/upload', methods=['GET', 'POST'])
+# def set_json():
+#     if request.method == 'POST':
+#         file = request.files['file']
+#         filename = file.filename
+#         if allowed_file(filename):
+#             return jsonify(parse_util.update_json_in_db(file))
+#         return jsonify(json.dumps({'msg': 'are you trying to fuck up my server? send me only json/xls/xlsx files!'}))
+#     else:
+#         return jsonify(json.dumps({'msg': 'dude this is POST only!@'}))
 
 if __name__ == '__main__':
     app.run()

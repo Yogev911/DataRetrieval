@@ -145,8 +145,9 @@ def parse_docx(filename):
 
 
 def insert_words_to_db(words_dict):
-    for key in sorted(words_dict.iterkeys()): THIS IS SQL QUERY FOR INSERT WORDS(key, words_dict[key]) #dict[word] = hits
-
+    # for key in sorted(words_dict.iterkeys()): THIS IS SQL QUERY FOR INSERT WORDS(key, words_dict[key]) #dict[word] = hits
+    pass
+    #
 
 
 
