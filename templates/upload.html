@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yogev's page</title>
+</head>
+<body>
+    {% if table %}
+        <h1>jnjnjnj</h1>
+    {% endif %}
+    <h1>Hey there!</h1>
+    <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+        <input type="text" name="inputname" value="" id="dd">
+        <input type="file" name="file" value="" id="myfile">
+        <input type="submit" value="Upload Image" name="submit">
+    </form>
+</body>
+</html>

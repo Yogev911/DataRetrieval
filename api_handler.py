@@ -76,16 +76,17 @@ class db_handler(object):
                 print ("Drop table failed with table " + str + "   " + e.message + e.args)
 
 
-def upload_file(file):
+def indexing(file_name):
     try:
-        new_file = str(time.mktime(datetime.datetime.today().timetuple()))+file.filename #NEW FILENAME = 23456234.ORIGINALFILENME
-        with open(new_file, 'w') as f:
-            f.write(file.read())
-        text = parse_file(new_file)
+        print 'testint'
+        text = parse_file(file_name)
+        print text
         dict = index_text(text)
         insert_words_to_db(dict)
         return OK_MESSAGE
     except Exception as e:
+        print e.message
+        print traceback.format_exc()
         return json.dumps({'msg': 'False', 'error': e.args, 'traceback': traceback.format_exc()})
 
 def get_file_extention(file_name):
