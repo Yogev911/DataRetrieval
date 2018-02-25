@@ -17,25 +17,26 @@ class Singleton(type):
         return cls._instances[cls]
 
 class db_handler(object):
-    __metaclass__ = Singleton
+    # __metaclass__ = Singleton
 
     def __init__(self):
         self.user = 'root'
         self.password = ''
-        self.host = 'localhost',
+        self.host = 'localhost'
         self.database = 'dataretrieval'
-        self.port = 3306
+        self.port = '3306'
         self.cnx = None
 
     def connect(self):
         try:
             self.cnx = mysql.connector.connect(user=self.user,
-                                               password=self.password,
+                                               password = self.password,
                                                host=self.host,
                                                database=self.database,
                                                port=self.port)
+
         except Exception as e:
-            print (traceback.format_exc())
+            print traceback.format_exc()
 
 
     def disconnect(self):
@@ -82,8 +83,30 @@ def indexing(file_name):
         text = parse_file(file_name)
         print text
         dict = index_text(text)
-        insert_words_to_db(dict)
-        return OK_MESSAGE
+        # insert_words_to_db(dict,file_name)
+        db = db_handler()
+        db.connect()
+        cursor = db.cnx.cursor()
+        query = ("insert into Indextable (term, hit) VALUES ('bla' , 567)")
+        cursor.execute(query)
+        query = ("insert into Indextable (term, hit) VALUES ('sss' , 345)")
+        cursor.execute(query)
+        query = ("insert into Indextable (term, hit) VALUES ('rrr' , 657)")
+        cursor.execute(query)
+        id = cursor.lastrowid
+        db.cnx.commit()
+        # query = "SELECT `postid` FROM `Indextable` WHERE `term` = 'tt'"
+        query = ("SELECT postid,hit FROM Indextable WHERE term=%s")
+        data = ('rrr', )
+
+        cursor.execute(query,data)
+        if cursor:
+            ret = cursor.fetchone()
+            if ret:
+                print ret[0]
+        db.disconnect()
+        print 'fffff'
+        # return OK_MESSAGE
     except Exception as e:
         print e.message
         print traceback.format_exc()
@@ -105,21 +128,22 @@ def parse_file(file_name):
 
 def index_text(text):
     words_dict = {}
-    for paragraph in text:
-        for line in paragraph.split('\n'):
-            for word in line.split(' '):
-                if word[-1:] == ',' or word[-1:] == ')' or word[-1:] == '(' or word[-1:] == '.': word = word[:-1]
-                if word[:1] == ',' or word[:1] == ')' or word[:1] == '(' or word[:1] == '.': word = word[1:]
-                if word not in words_dict:
-                    words_dict[word] = 1
-                else:
-                    words_dict[word] += 1
+    for line in text.split('\n'):
+        for word in line.split(' '):
+            if word[-1:] == ',' or word[-1:] == ')' or word[-1:] == '(' or word[-1:] == '.': word = word[:-1]
+            if word[:1] == ',' or word[:1] == ')' or word[:1] == '(' or word[:1] == '.': word = word[1:]
+            if word not in words_dict:
+                words_dict[word] = 1
+            else:
+                words_dict[word] += 1
     return words_dict
 
 
 def parse_text(file_name):
-    with open(file_name, 'r').read().lower() as f:
-        return f
+    file = open(file_name, 'r')
+    return file.read().lower()
+    # with open(file_name, 'r').read().lower() as f:
+    #     return f
 
 
 
@@ -145,11 +169,24 @@ def parse_docx(filename):
     return '\n'.join(fullText)
 
 
-def insert_words_to_db(words_dict):
-    # for key in sorted(words_dict.iterkeys()): THIS IS SQL QUERY FOR INSERT WORDS(key, words_dict[key]) #dict[word] = hits
+def insert_words_to_db(words_dict,file_name):
+    for key in sorted(words_dict.iterkeys()): update_word(key, words_dict[key],file_name) #dict[word] = hits
     pass
-    #
 
 
+def update_word(key, param, file_name):
+    query = ("SELECT postid,hit FROM Indextable WHERE term=%s")
+    data = (key,)
+    cursor.execute(query, data)
+    ret = cursor.fetchone()
+    if not ret:
+        #instert into term  = key , hit = 1
+        cursor.execute(query)
+        postid = cursor.lastrowid
+    else
+        postid = ret[0]
+        #update hits to hit += 1
+        cursor.execute(query)
+    #insert into postfiletable postid = postid , hit = param , docname = file_name
 
 

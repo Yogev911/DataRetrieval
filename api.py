@@ -1,7 +1,7 @@
 import json
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
-from flask import Flask, request, jsonify , render_template
+from flask import Flask, request, jsonify , render_template, redirect, url_for
 from api_handler import db_handler
 import os
 import time
@@ -30,24 +30,20 @@ def index():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     target = os.path.join(APP_ROOT,'uploads')
-    print target
     file = request.files['file']
-    print file
     uuid = str(time.time()).split('.')[0]
     filename = uuid + secure_filename(file.filename)
     dest = '/'.join([target,filename])
-    print dest
     file.save(dest)
-    time.sleep(5)
-    # api_handler.indexing(dest)
-
-    print 'l,l,l,kmk'
-    api_handler.indexing(filename)
-    return render_template('upload.html', table = 'table')
+    return redirect(url_for('yogev', filename=dest))
 
 @app.route("/yogev",methods=['GET', 'POST'])
 def yogev():
-    return render_template('upload.html')
+    print 'bla'
+    filename =  request.args.get('filename')
+    print 'the get file name is --- {}'.format(filename)
+    return jsonify(api_handler.indexing(filename))
+    return render_template('index.html')
 
 # @app.route('/upload', methods=['GET', 'POST'])
 # def set_json():
