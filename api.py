@@ -27,23 +27,29 @@ def root():
 def index():
     return 'index'
 
+@app.route('/init', methods=['GET', 'POST'])
+def init():
+    api_handler.init_db()
+    return 'index'
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     target = os.path.join(APP_ROOT,'uploads')
     file = request.files['file']
     uuid = str(time.time()).split('.')[0]
     filename = uuid + secure_filename(file.filename)
-    dest = '/'.join([target,filename])
-    file.save(dest)
-    return redirect(url_for('yogev', filename=dest))
+    path = '/'.join([target,filename])
+    file.save(path)
+    return redirect(url_for('yogev', filename = file.filename,path=path))
 
 @app.route("/yogev",methods=['GET', 'POST'])
 def yogev():
     print 'bla'
     filename =  request.args.get('filename')
+    path = request.args.get('path')
     print 'the get file name is --- {}'.format(filename)
-    return jsonify(api_handler.indexing(filename))
-    return render_template('index.html')
+    api_handler.indexing(filename , path)
+    return render_template('upload.html')
 
 # @app.route('/upload', methods=['GET', 'POST'])
 # def set_json():
