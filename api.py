@@ -25,7 +25,15 @@ def root():
 
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    return 'index'
+    return render_template('upload.html')
+
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    return render_template('upload.html')
+
+@app.route('/admin/<test>', methods=['GET', 'POST'])
+def admin():
+    return render_template('upload.html')
 
 @app.route('/init', methods=['GET', 'POST'])
 def init():
@@ -40,7 +48,12 @@ def upload():
     filename = uuid + secure_filename(file.filename)
     path = '/'.join([target,filename])
     file.save(path)
-    return redirect(url_for('yogev', filename = file.filename,path=path))
+
+    filename = file.filename
+    print 'TESTING NO REDIRECT the get file name is --- {}'.format(filename)
+    api_handler.indexing(filename, path)
+
+    return redirect(url_for('admin', obj = 'test'))
 
 @app.route("/yogev",methods=['GET', 'POST'])
 def yogev():

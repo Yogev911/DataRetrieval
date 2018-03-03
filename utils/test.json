@@ -1,0 +1,26 @@
+get all relevent files
+get query
+return this
+
+[
+  {
+    "docname": 'vvv',
+    "auther" : 'etgh'
+    "path" : 'dfg'
+  },
+  {
+    "docname": 'vvv',
+    "auther" : 'etgh'
+    "path" : 'dfg'
+  }
+]
+
+
+
+
+{
+  "docname": 'vvv',
+  "auther" : 'etgh'
+  "path" : 'dfg'
+  "content" : 'dfgdfghjdhgjhdsfghjtyh'
+}
