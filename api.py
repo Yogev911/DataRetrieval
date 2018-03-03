@@ -31,9 +31,6 @@ def index():
 def admin():
     return render_template('upload.html')
 
-@app.route('/admin/<test>', methods=['GET', 'POST'])
-def admin():
-    return render_template('upload.html')
 
 @app.route('/init', methods=['GET', 'POST'])
 def init():
