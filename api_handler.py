@@ -1,7 +1,7 @@
 import mysql.connector
 import traceback
 import json
-from dateutil.relativedelta import relativedelta
+# from dateutil.relativedelta import relativedelta
 
 OK_MESSAGE = json.dumps({'msg': 'True'})
 import os
