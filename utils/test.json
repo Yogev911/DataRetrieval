@@ -24,3 +24,13 @@ return this
   "path" : 'dfg'
   "content" : 'dfgdfghjdhgjhdsfghjtyh'
 }
+
+{
+  "success" :  true,
+  "data" : {
+    "docname": 'vvv',
+    "auther" : 'etgh'
+    "path" : 'dfg'
+    "content" : 'dfgdfghjdhgjhdsfghjtyh'
+  }
+}

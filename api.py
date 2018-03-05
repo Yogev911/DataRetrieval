@@ -1,12 +1,11 @@
 import json
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
-from flask import Flask, request, jsonify , render_template, redirect, url_for
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 from api_handler import db_handler
 import os
 import time
 import api_handler
-
 
 app = Flask(__name__)
 CORS(app)
@@ -14,9 +13,11 @@ CORS(app)
 ALLOWED_EXTENSIONS = set(['json', 'txt', 'xlsx'])
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+
 def allowed_file(filename):
     # this has changed from the original example because the original did not work for me
     return str(filename).split('.')[-1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.route('/', methods=['GET', 'POST'])
 def root():
@@ -25,7 +26,8 @@ def root():
 
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    return render_template('upload.html')
+    return render_template('index.html')
+
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
@@ -37,29 +39,34 @@ def init():
     api_handler.init_db()
     return 'index'
 
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    query = request.form['query']
+    x = api_handler.res_query(query)
+    x = jsonify(x)
+    return x
+
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
-    target = os.path.join(APP_ROOT,'uploads')
+    target = os.path.join(APP_ROOT, 'uploads')
     file = request.files['file']
+    name = request.form['inputname']
     uuid = str(time.time()).split('.')[0]
     filename = uuid + secure_filename(file.filename)
-    path = '/'.join([target,filename])
+    path = '/'.join([target, filename])
     file.save(path)
-
     filename = file.filename
-    print 'TESTING NO REDIRECT the get file name is --- {}'.format(filename)
-    api_handler.indexing(filename, path)
+    return jsonify(api_handler.res_upload_file(filename, path))
+    # return redirect(url_for('admin', obj = 'test'))
 
-    return redirect(url_for('admin', obj = 'test'))
 
-@app.route("/yogev",methods=['GET', 'POST'])
+@app.route("/query", methods=['GET', 'POST'])
 def yogev():
-    print 'bla'
-    filename =  request.args.get('filename')
-    path = request.args.get('path')
-    print 'the get file name is --- {}'.format(filename)
-    api_handler.indexing(filename , path)
-    return render_template('upload.html')
+    query = request.form['query']
+    return jsonify(api_handler.res_query(query))
+
 
 # @app.route('/upload', methods=['GET', 'POST'])
 # def set_json():

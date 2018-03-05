@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Yogev's page</title>
 </head>
-<body>
-    <h1>Hey there! this is index!</h1>
-
-</body>
+    <body>
+        <form action="{{ url_for('search') }}" method="POST" enctype="multipart/form-data">
+            <input type="text" name="query" value="" id="dd">
+            <input type="submit" value="Search!" name="submit">
+        </form>
+    </body>
 </html>
