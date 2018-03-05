@@ -51,15 +51,16 @@ def search():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     target = os.path.join(APP_ROOT, 'uploads')
-    file = request.files['file']
-    name = request.form['inputname']
-    uuid = str(time.time()).split('.')[0]
-    filename = uuid + secure_filename(file.filename)
-    path = '/'.join([target, filename])
-    file.save(path)
-    filename = file.filename
-    return jsonify(api_handler.res_upload_file(filename, path))
-    # return redirect(url_for('admin', obj = 'test'))
+    author = request.form['author']
+    files = request.files.getlist('file')
+    for file in files:
+        uuid = str(time.time()).split('.')[0]
+        filename = uuid + secure_filename(file.filename)
+        path = '/'.join([target, filename])
+        file.save(path)
+        filename = file.filename
+        api_handler.res_upload_file(filename, path,author)
+    return redirect(url_for('admin', obj = 'test'))
 
 
 @app.route("/query", methods=['GET', 'POST'])

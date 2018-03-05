@@ -10,8 +10,8 @@
     {% endif %}
     <h1>Hey there!</h1>
     <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
-        <input type="text" name="inputname" value="" id="dd">
-        <input type="file" name="file" value="" id="myfile">
+        <input type="text" name="author" value="" id="dd">
+        <input type="file" name="file" value="" id="myfile" multiple>
         <input type="submit" value="Upload Image" name="submit">
     </form>
 

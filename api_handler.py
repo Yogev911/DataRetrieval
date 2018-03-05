@@ -171,7 +171,7 @@ def init_db():
     db.cnx.commit()
 
 
-def res_upload_file(file_name, path):
+def res_upload_file(file_name, path,author):
     try:
         global db
         db.connect()
@@ -179,7 +179,7 @@ def res_upload_file(file_name, path):
         print text
         dict = index_text(text)
         # init_db()
-        update_words_to_db(dict, file_name, path)
+        update_words_to_db(dict, file_name, path,author)
         db.disconnect()
         return create_res_obj({'msg': 'got it!'})
     except Exception as e:
@@ -246,8 +246,10 @@ def parse_docx(filename):
     return '\n'.join(fullText)
 
 
-def update_words_to_db(words_dict, file_name, path):
-    for key in sorted(words_dict.iterkeys()): _update_word(key, words_dict[key], file_name, path)  # dict[word] = hits
+def update_words_to_db(words_dict, file_name, path,author):
+    if _is_duplicated_file(file_name):
+        return 'file is already indexd'
+    for key in sorted(words_dict.iterkeys()): _update_word(key, words_dict[key], file_name, path,author)  # dict[word] = hits
     pass
 
 
@@ -267,7 +269,7 @@ def _is_duplicated_file(docname):
     return False
 
 
-def _update_word(term, term_hits, file_name, path):
+def _update_word(term, term_hits, file_name, path,author='Yogev'):
     try:
         cursor = db.cnx.cursor()
         query = ("SELECT postid,hit FROM Indextable WHERE term=%s")
@@ -280,17 +282,16 @@ def _update_word(term, term_hits, file_name, path):
         except:
             pass
         if not ret:
+            # found new term
             new_postid = _add_new_term(term)
-            docid = _insert_row_doc_tbl(file_name, 'authorr', path)
+            docid = _insert_row_doc_tbl(file_name, author, path)
             _insert_row_postfile_tbl(new_postid, term_hits, docid)
 
         else:
-            if _is_duplicated_file(file_name):
-                print 'file is already indexd'
-            else:
-                _inc_hit_indextbl(hit, postid)
-                docid = _insert_row_doc_tbl(file_name, 'authorr', path)
-                _insert_row_postfile_tbl(postid, term_hits, docid)
+            # found term which is alreay exists
+            _inc_hit_indextbl(hit, postid)
+            docid = _insert_row_doc_tbl(file_name, author, path)
+            _insert_row_postfile_tbl(postid, term_hits, docid)
         cursor.close()
         return True
     except:

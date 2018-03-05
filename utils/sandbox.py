@@ -27,17 +27,3 @@ doc_data = {
     "content": content
 }
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Yogev's page</title>
-</head>
-    <body>
-        <form action="{{ url_for('search') }}" method="POST" enctype="multipart/form-data">
-            <input type="text" name="query" value="" id="dd">
-            <input type="submit" value="Search!" name="submit">
-        </form>
-    </body>
-</html>
