@@ -2,6 +2,7 @@ import mysql.connector
 import traceback
 import json
 import ast
+import re
 
 # from dateutil.relativedelta import relativedelta
 
@@ -171,7 +172,7 @@ def init_db():
     db.cnx.commit()
 
 
-def res_upload_file(file_name, path,author):
+def res_upload_file(file_name, path, author):
     try:
         global db
         db.connect()
@@ -179,7 +180,7 @@ def res_upload_file(file_name, path,author):
         print text
         dict = index_text(text)
         # init_db()
-        update_words_to_db(dict, file_name, path,author)
+        update_words_to_db(dict, file_name, path, author)
         db.disconnect()
         return create_res_obj({'msg': 'got it!'})
     except Exception as e:
@@ -246,10 +247,11 @@ def parse_docx(filename):
     return '\n'.join(fullText)
 
 
-def update_words_to_db(words_dict, file_name, path,author):
+def update_words_to_db(words_dict, file_name, path, author):
     if _is_duplicated_file(file_name):
         return 'file is already indexd'
-    for key in sorted(words_dict.iterkeys()): _update_word(key, words_dict[key], file_name, path,author)  # dict[word] = hits
+    for key in sorted(words_dict.iterkeys()): _update_word(key, words_dict[key], file_name, path,
+                                                           author)  # dict[word] = hits
     pass
 
 
@@ -269,7 +271,7 @@ def _is_duplicated_file(docname):
     return False
 
 
-def _update_word(term, term_hits, file_name, path,author='Yogev'):
+def _update_word(term, term_hits, file_name, path, author='Yogev'):
     try:
         cursor = db.cnx.cursor()
         query = ("SELECT postid,hit FROM Indextable WHERE term=%s")
@@ -394,7 +396,34 @@ def res_query(query):
         global db
         db.connect()
         data = []
+        if not query.replace(')', '').replace('(', '').replace('AND', '').replace('OR', '').replace('NOT', '').replace(
+                '"', '').strip():
+            query = 'error'
+        tmp_query = query.rstrip()
+        if tmp_query.endswith(' AND') or tmp_query.endswith(' OR') or tmp_query.endswith(' NOT'):
+            tmp_query = query.replace('AND', '').replace('OR', '').replace('NOT', '')
+        string_with_quotes = ''
+        if (not 'AND' in tmp_query) and (not 'OR' in tmp_query) and (not 'NOT' in tmp_query):
+            query = ' '.join(tmp_query.split()).replace(' ', ' OR ')
+        quotes_string = re.findall(r'"([^"]*)"', tmp_query)
+        if quotes_string:
+            string_with_quotes = ' '.join(tmp_query.split()).replace('AND', '').replace('OR', '').replace('NOT', '')
+            for quote in quotes_string:
+                string_with_quotes = string_with_quotes.replace(quote, '')
+            for quote in quotes_string:
+                string_with_quotes += ' OR (' + quote.replace(' ', ' AND ') + ')'
+            string_with_quotes = string_with_quotes.replace('"','').strip()
+            if string_with_quotes.endswith('OR'):
+                string_with_quotes = string_with_quotes[:-3]
+            if string_with_quotes.startswith('AND') or string_with_quotes.startswith('NOT'):
+                string_with_quotes = string_with_quotes[3:]
+            if string_with_quotes.startswith('OR'):
+                string_with_quotes = string_with_quotes[2:]
+            query = string_with_quotes
+
+
         tmp_query = query.replace(')', '').replace('(', '').replace('AND', '').replace('OR', '').replace('NOT', '')
+        tmp_query = tmp_query.lower()
         words_list = tmp_query.split()
         words_list_in_quotes = ['\'' + w + '\'' for w in words_list]
         words_dict = {}
@@ -403,16 +432,16 @@ def res_query(query):
 
         processed_query = ''
         for item in query.split():
-            if item in words_dict:
-                processed_query += words_dict[item]
-            elif item.replace(')', '') in words_dict:
+            if item.lower() in words_dict:
+                processed_query += words_dict[item.lower()]
+            elif item.replace(')', '').lower() in words_dict:
                 b = item.count(')')
-                processed_query += words_dict[item.replace(')', '')]
+                processed_query += words_dict[item.replace(')', '').lower()]
                 processed_query += b * ')'
-            elif item.replace('(', '') in words_dict:
+            elif item.replace('(', '').lower() in words_dict:
                 b = item.count('(')
                 processed_query += b * '('
-                processed_query += words_dict[item.replace('(', '')]
+                processed_query += words_dict[item.replace('(', '').lower()]
             else:
                 processed_query += item
             processed_query += ' '

@@ -11,6 +11,7 @@ app = Flask(__name__)
 CORS(app)
 
 ALLOWED_EXTENSIONS = set(['json', 'txt', 'xlsx'])
+STOP_LIST = set(['json', 'txt', 'xlsx'])
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
