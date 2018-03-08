@@ -114,38 +114,6 @@ class db_handler(object):
                 print ("DROP TABLE failed WITH TABLE " + str + "   " + e.message + e.args)
 
 
-def testing():
-    db = db_handler()
-    db.connect()
-    _update_word('yogev', 11, 'dfgfg')
-    # cursor = db.cnx.cursor()
-    # query = ("insert into Indextable (term, hit) VALUES ('bla' , 567)")
-    # cursor.execute(query)
-    # query = ("insert into Indextable (term, hit) VALUES ('sss' , 345)")
-    # cursor.execute(query)
-    # query = ("insert into Indextable (term, hit) VALUES ('rrr' , 657)")
-    # cursor.execute(query)
-    # id = cursor.lastrowid
-    # db.cnx.commit()
-    # query = "SELECT `postid` FROM `Indextable` WHERE `term` = 'tt'"
-    # query = ("SELECT postid,hit FROM Indextable WHERE term=%s")
-    # data = ('rrr',)
-    # cursor.execute(query, data)
-    # if cursor:
-    #     ret = cursor.fetchone()
-    #     i ret:`
-    #         print ret[0]
-
-    query = ("SELECT postid,hit FROM Indextable WHERE term=%s")
-    data = ('sss',)
-    cursor.execute(query, data)
-    ret = cursor.fetchone()
-    postid = ret[0]
-    hit = ret[0]
-    db.disconnect()
-    print 'fffff'
-
-
 db = db_handler()
 
 
@@ -413,7 +381,7 @@ def res_query(query):
                 string_with_quotes = string_with_quotes.replace(quote, '')
             for quote in quotes_string:
                 string_with_quotes += ' OR (' + quote.replace(' ', ' AND ') + ')'
-            string_with_quotes = string_with_quotes.replace('"','').strip()
+            string_with_quotes = string_with_quotes.replace('"', '').strip()
             if string_with_quotes.endswith('OR'):
                 string_with_quotes = string_with_quotes[:-3]
             if string_with_quotes.startswith('AND') or string_with_quotes.startswith('NOT'):
@@ -421,7 +389,6 @@ def res_query(query):
             if string_with_quotes.startswith('OR'):
                 string_with_quotes = string_with_quotes[2:]
             query = string_with_quotes
-
 
         tmp_query = query.replace(')', '').replace('(', '').replace('AND', '').replace('OR', '').replace('NOT', '')
         tmp_query = tmp_query.lower()
@@ -513,7 +480,7 @@ def get_data_by_docid(doc_id):
     docname = None
     author = None
     cursor = db.cnx.cursor()
-    query = ("SELECT docname,author,path FROM doc_tbl WHERE docid=%s")
+    query = ("SELECT docname,author,path FROM doc_tbl WHERE docid =%s")
     data = (doc_id,)
     cursor.execute(query, data)
     try:
@@ -535,6 +502,7 @@ def get_data_by_docid(doc_id):
         "content": content
     }
     return doc_data
+
 
 def delete_doc(doc_path):
     try:

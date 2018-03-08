@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yogev's page</title>
+</head>
+    <body>
+        <form action="{{ url_for('delete') }}" method="POST" enctype="multipart/form-data">
+            <input type="text" name="del_path" value="" id="dd">
+            <input type="submit" value="kill it!" name="submit">
+        </form>
+    </body>
+</html>
