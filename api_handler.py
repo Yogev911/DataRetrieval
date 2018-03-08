@@ -12,12 +12,13 @@ import docx
 import time, datetime
 
 SAVE_PATH = 'uploads/'
+STOP_LIST = set(['json', 'txt', 'xlsx'])
 
 
 def create_res_obj(data, success=True):
     '''
     create return obj with array of data.
-    :param data: array of 'data_obj'
+    :param data: dict of 'data_obj'
     :param success: json format for response
     :return:
     '''
@@ -182,7 +183,7 @@ def res_upload_file(file_name, path, author):
         # init_db()
         update_words_to_db(dict, file_name, path, author)
         db.disconnect()
-        return create_res_obj({'msg': 'got it!'})
+        return {'msg': 'got it!', 'filename': file_name}
     except Exception as e:
         print e.message
         print traceback.format_exc()
@@ -534,3 +535,51 @@ def get_data_by_docid(doc_id):
         "content": content
     }
     return doc_data
+
+def delete_doc(doc_path):
+    try:
+        global db
+        db.connect()
+        cursor = db.cnx.cursor()
+        if os.path.exists(doc_path):
+            postid_list = []
+            query = ("SELECT docid FROM doc_tbl WHERE path=%s")
+            data = (doc_path,)
+            cursor.execute(query, data)
+            docid = cursor.fetchone()[0]
+            query = ("SELECT postid FROM postfiletable WHERE docid=%s")
+            data = (docid,)
+            cursor.execute(query, data)
+            for row in cursor:
+                postid_list.append(row[0])
+            for postid in postid_list:
+                query = ("SELECT hit FROM indextable WHERE postid=%s")
+                data = (postid,)
+                cursor.execute(query, data)
+                hit = cursor.fetchone()[0]
+                if hit == 1:
+                    query = ("DELETE FROM indextable WHERE postid=%s")
+                    data = (postid,)
+                    cursor.execute(query, data)
+                    db.cnx.commit()
+                else:
+                    new_hit = hit - 1
+                    query = ("UPDATE `indextable` SET `hit` = {} WHERE `indextable`.`postid` = %s").format(str(new_hit))
+                    data = (postid,)
+                    cursor.execute(query, data)
+                    db.cnx.commit()
+            query = ("DELETE FROM postfiletable WHERE docid=%s")
+            data = (docid,)
+            cursor.execute(query, data)
+            query = ("DELETE FROM doc_tbl WHERE docid=%s")
+            data = (docid,)
+            cursor.execute(query, data)
+            os.remove(doc_path)
+            db.cnx.commit()
+            db.disconnect()
+
+            return create_res_obj(data)
+    except Exception as e:
+        print e.message
+        print traceback.format_exc()
+        return json.dumps({'msg': 'False', 'error': e.args, 'traceback': traceback.format_exc()})

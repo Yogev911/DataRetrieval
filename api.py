@@ -10,19 +10,17 @@ import api_handler
 app = Flask(__name__)
 CORS(app)
 
-ALLOWED_EXTENSIONS = set(['json', 'txt', 'xlsx'])
-STOP_LIST = set(['json', 'txt', 'xlsx'])
+ALLOWED_EXTENSIONS = set(['dox', 'txt', 'docx'])
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
 def allowed_file(filename):
-    # this has changed from the original example because the original did not work for me
     return str(filename).split('.')[-1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route('/', methods=['GET', 'POST'])
 def root():
-    return render_template('upload.html')
+    return 'hello! this is index!@#$'
 
 
 @app.route('/index', methods=['GET', 'POST'])
@@ -43,43 +41,53 @@ def init():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    query = request.form['query']
-    x = api_handler.res_query(query)
-    x = jsonify(x)
-    return x
+    if request.method == 'POST':
+        query = request.form['query']
+        x = api_handler.res_query(query)
+        x = jsonify(x)
+        return x
+    elif request.method == 'GET':
+        return render_template('index.html')
+
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+    if request.method == 'POST':
+        path = request.form['del_path']
+        x = api_handler.delete_doc(path)
+        x = jsonify(x)
+        return x
+    elif request.method == 'GET':
+        return render_template('delete.html')
 
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
-    target = os.path.join(APP_ROOT, 'uploads')
-    author = request.form['author']
-    files = request.files.getlist('file')
-    for file in files:
-        uuid = str(time.time()).split('.')[0]
-        filename = uuid + secure_filename(file.filename)
-        path = '/'.join([target, filename])
-        file.save(path)
-        filename = file.filename
-        api_handler.res_upload_file(filename, path,author)
-    return redirect(url_for('admin', obj = 'test'))
+    if request.method == 'POST':
+        return_data = []
+        target = os.path.join(APP_ROOT, 'uploads')
+        author = request.form['author']
+        files = request.files.getlist('file')
+        for file in files:
+            uuid = str(time.time()).split('.')[0]
+            filename = uuid + secure_filename(file.filename)
+            path = '/'.join([target, filename])
+            file.save(path)
+            filename = file.filename
+            return_data.append(api_handler.res_upload_file(filename, path, author))
+        return api_handler.create_res_obj(return_data)
+    elif request.method == 'GET':
+        return redirect(url_for('admin'))
+
 
 
 @app.route("/query", methods=['GET', 'POST'])
 def yogev():
-    query = request.form['query']
-    return jsonify(api_handler.res_query(query))
+    if request.method == 'POST':
+        query = request.form['query']
+        return jsonify(api_handler.res_query(query))
+    return jsonify(json.dumps({'msg': 'dude this is POST only!@'}))
 
-
-# @app.route('/upload', methods=['GET', 'POST'])
-# def set_json():
-#     if request.method == 'POST':
-#         file = request.files['file']
-#         filename = file.filename
-#         if allowed_file(filename):
-#             return jsonify(parse_util.update_json_in_db(file))
-#         return jsonify(json.dumps({'msg': 'are you trying to fuck up my server? send me only json/xls/xlsx files!'}))
-#     else:
-#         return jsonify(json.dumps({'msg': 'dude this is POST only!@'}))
 
 if __name__ == '__main__':
     app.run()
