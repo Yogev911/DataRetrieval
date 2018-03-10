@@ -22,3 +22,5 @@ TEMPLATES = ['#Author name :',
 REGEX = re.compile('[^a-zA-Z \']')
 
 TMP_FOLDER = '/Users/yogev/Documents/DataRetrieval/tmp/'
+
+STOP_LIST = ['one','two']

@@ -407,6 +407,10 @@ def res_query(query):
         global db
         db.connect()
         data = []
+        for term in conf.STOP_LIST:
+            query = re.sub(r'\b' + term + r'\b', ' ', query,
+                            flags=re.IGNORECASE)
+
         if not query.replace(')', '').replace('(', '').replace('AND', '').replace('OR', '').replace('NOT', '').replace(
                 '"', '').strip():
             query = 'error'
