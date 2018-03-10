@@ -539,7 +539,7 @@ def get_data_by_docid(doc_id, word_list):
     else:
         content = 'Empty'
     for term in word_list:
-        content = re.sub(r'\b' + term + r'\b', '<b>'+term+'</b>', content,flags=re.IGNORECASE)
+        content = re.sub(r'\b' + term + r'\b', '<span style="color:red;font-weight:bold">'+term+'</span>', content,flags=re.IGNORECASE)
     doc_data = {
         "docname": docname,
         "auther": author,

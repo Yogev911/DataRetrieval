@@ -1,3 +1,6 @@
+#Author name : Yogev Heskia
+#Year : 2018
+#Intro : bla bla bla bla
 RHYME, the rack of finest wits,
 That expresseth but with fits
 True conceit;
