@@ -3,6 +3,8 @@ import traceback
 import json
 import ast
 import re
+import conf
+import textract
 
 # from dateutil.relativedelta import relativedelta
 
@@ -13,6 +15,7 @@ import time, datetime
 
 SAVE_PATH = 'uploads/'
 STOP_LIST = set(['json', 'txt', 'xlsx'])
+SPECIAL_CHARS = set(['.', ',', '(', ')', '(', '"'])
 
 
 def create_res_obj(data, success=True):
@@ -74,7 +77,8 @@ class db_handler(object):
                                                port=self.port)
 
         except Exception as e:
-            print traceback.format_exc()
+            return create_res_obj({'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+                                  success=False)
 
     def disconnect(self):
         if self.cnx:
@@ -111,7 +115,10 @@ class db_handler(object):
             try:
                 cursor.execute("drop table " + str)
             except Exception as e:
-                print ("DROP TABLE failed WITH TABLE " + str + "   " + e.message + e.args)
+                return create_res_obj({'traceback': traceback.format_exc(),
+                                       'msg': "{} {}".format(e.message, e.args),
+                                       'text': "DROP TABLE failed WITH TABLE {} ".format(str)},
+                                      success=False)
 
 
 db = db_handler()
@@ -141,21 +148,20 @@ def init_db():
     db.cnx.commit()
 
 
-def res_upload_file(file_name, path, author):
+def res_upload_file(file_name, path):
     try:
         global db
         db.connect()
         text = parse_file(path)
         print text
-        dict = index_text(text)
+        values = parse_text_to_dict(text)
         # init_db()
-        update_words_to_db(dict, file_name, path, author)
+        update_words_to_db(values['words_dict'], file_name, path, values['author'], values['year'], values['intro'])
         db.disconnect()
-        return {'msg': 'got it!', 'filename': file_name}
+        return {'msg': 'got it!', 'filename': file_name, 'path': path, 'author': values['author'],
+                'year': values['year'], 'intro': values['intro'], 'content': text}
     except Exception as e:
-        print e.message
-        print traceback.format_exc()
-        return json.dumps({'msg': 'False', 'error': e.args, 'traceback': traceback.format_exc()})
+        return {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)}
 
 
 def get_file_extention(file_name):
@@ -163,23 +169,23 @@ def get_file_extention(file_name):
 
 
 def parse_file(file_path):
-    if get_file_extention(file_path) == 'txt':
+    if os.path.splitext(file_path)[1] == '.txt':
         return parse_text(file_path)
-    elif get_file_extention(file_path) == 'doc':
-        return parse_doc(file_path)
-    elif get_file_extention(file_path) == 'docx':
-        return parse_docx(file_path)
-    return OK_MESSAGE
+    else:
+        return textract.process(file_path)
 
 
 def index_text(text):
+    regex = re.compile('[^a-zA-Z \']')
+    text = regex.sub('', text)
+    text = ' '.join(text.split())
     words_dict = {}
     for line in text.split('\n'):
         for word in line.split(' '):
-            if word[-1:] == ',' or word[-1:] == ')' or word[-1:] == '(' or word[-1:] == '.': word = word[:-1]
-            if word[:1] == ',' or word[:1] == ')' or word[:1] == '(' or word[:1] == '.': word = word[1:]
-            if word == '' or word == ' ':
-                continue
+            # if word[-1:] == ',' or word[-1:] == ')' or word[-1:] == '(' or word[-1:] == '.': word = word[:-1]
+            if word[:1] == '\'': word = word[1:]
+            # if word == '' or word == ' ':
+            #     continue
             if word not in words_dict:
                 words_dict[word] = 1
             else:
@@ -187,9 +193,40 @@ def index_text(text):
     return words_dict
 
 
+def parse_text_to_dict(text):
+    author = 'None'
+    year = 'None'
+    intro = 'None'
+    words_dict = {}
+    for line in text.split('\n'):
+        if line.startswith(conf.TEMPLATES[0]):
+            author = line.replace(conf.TEMPLATES[0], '').strip()
+        elif line.startswith(conf.TEMPLATES[1]):
+            year = line.replace(conf.TEMPLATES[1], '').strip()
+        elif line.startswith(conf.TEMPLATES[2]):
+            intro = line.replace(conf.TEMPLATES[2], '').strip()
+        else:
+            tmp_line = conf.REGEX.sub('', line).lower()
+            for word in tmp_line.split(' '):
+                if word[:1] == '\'': word = word[1:]
+                if word == '' or word == ' ':
+                    continue
+                if word not in words_dict:
+                    words_dict[word] = 1
+                else:
+                    words_dict[word] += 1
+
+    values = {'words_dict': words_dict,
+              'author': author,
+              'year': year,
+              'intro': intro
+              }
+    return values
+
+
 def parse_text(file_name):
     file = open(file_name, 'r')
-    return file.read().lower()
+    return file.read()
     # with open(file_name, 'r').read().lower() as f:
     #     return f
 
@@ -216,11 +253,11 @@ def parse_docx(filename):
     return '\n'.join(fullText)
 
 
-def update_words_to_db(words_dict, file_name, path, author):
+def update_words_to_db(words_dict, file_name, path, author, year, intro):
     if _is_duplicated_file(file_name):
         return 'file is already indexd'
     for key in sorted(words_dict.iterkeys()): _update_word(key, words_dict[key], file_name, path,
-                                                           author)  # dict[word] = hits
+                                                           author, year, intro)
     pass
 
 
@@ -240,7 +277,7 @@ def _is_duplicated_file(docname):
     return False
 
 
-def _update_word(term, term_hits, file_name, path, author='Yogev'):
+def _update_word(term, term_hits, file_name, path, author, year, intro):
     try:
         cursor = db.cnx.cursor()
         query = ("SELECT postid,hit FROM Indextable WHERE term=%s")
@@ -255,13 +292,13 @@ def _update_word(term, term_hits, file_name, path, author='Yogev'):
         if not ret:
             # found new term
             new_postid = _add_new_term(term)
-            docid = _insert_row_doc_tbl(file_name, author, path)
+            docid = _insert_row_doc_tbl(file_name, author, path, year, intro)
             _insert_row_postfile_tbl(new_postid, term_hits, docid)
 
         else:
             # found term which is alreay exists
             _inc_hit_indextbl(hit, postid)
-            docid = _insert_row_doc_tbl(file_name, author, path)
+            docid = _insert_row_doc_tbl(file_name, author, path, year, intro)
             _insert_row_postfile_tbl(postid, term_hits, docid)
         cursor.close()
         return True
@@ -319,7 +356,7 @@ def _insert_row_postfile_tbl(postid, term_hits, docid):
     return True
 
 
-def _insert_row_doc_tbl(docname, author, path):
+def _insert_row_doc_tbl(docname, author, path, year, intro):
     '''
     :param docname:
     :param author:
@@ -340,8 +377,8 @@ def _insert_row_doc_tbl(docname, author, path):
     if docid:
         return docid
     else:
-        query = ("INSERT INTO doc_tbl (docname, author,path) VALUES (%s , %s , %s)")
-        data = (docname, author, path)
+        query = ("INSERT INTO doc_tbl (docname, author,path, year, intro) VALUES (%s , %s , %s, %s , %s)")
+        data = (docname, author, path, year, intro)
         cursor.execute(query, data)
         db.cnx.commit()
         query = ("SELECT docid FROM doc_tbl WHERE path=%s")
@@ -375,25 +412,29 @@ def res_query(query):
         if (not 'AND' in tmp_query) and (not 'OR' in tmp_query) and (not 'NOT' in tmp_query):
             query = ' '.join(tmp_query.split()).replace(' ', ' OR ')
         quotes_string = re.findall(r'"([^"]*)"', tmp_query)
-        if quotes_string:
-            string_with_quotes = ' '.join(tmp_query.split()).replace('AND', '').replace('OR', '').replace('NOT', '')
-            for quote in quotes_string:
-                string_with_quotes = string_with_quotes.replace(quote, '')
-            for quote in quotes_string:
-                string_with_quotes += ' OR (' + quote.replace(' ', ' AND ') + ')'
-            string_with_quotes = string_with_quotes.replace('"', '').strip()
-            if string_with_quotes.endswith('OR'):
-                string_with_quotes = string_with_quotes[:-3]
-            if string_with_quotes.startswith('AND') or string_with_quotes.startswith('NOT'):
-                string_with_quotes = string_with_quotes[3:]
-            if string_with_quotes.startswith('OR'):
-                string_with_quotes = string_with_quotes[2:]
-            query = string_with_quotes
+        if len(quotes_string) == 1:
+            query = query.replace("\"","")
+        elif len(quotes_string) > 1:
+            if quotes_string:
+                string_with_quotes = ' '.join(tmp_query.split()).replace('AND', '').replace('OR', '').replace('NOT', '')
+                for quote in quotes_string:
+                    string_with_quotes = string_with_quotes.replace(quote, '')
+                for quote in quotes_string:
+                    string_with_quotes += ' OR (' + quote.replace(' ', ' AND ') + ')'
+                string_with_quotes = string_with_quotes.replace('"', '').strip()
+                if string_with_quotes.endswith('OR'):
+                    string_with_quotes = string_with_quotes[:-3]
+                if string_with_quotes.startswith('AND') or string_with_quotes.startswith('NOT'):
+                    string_with_quotes = string_with_quotes[3:]
+                if string_with_quotes.startswith('OR'):
+                    string_with_quotes = string_with_quotes[2:]
+                query = string_with_quotes
 
         tmp_query = query.replace(')', '').replace('(', '').replace('AND', '').replace('OR', '').replace('NOT', '')
         tmp_query = tmp_query.lower()
         words_list = tmp_query.split()
-        words_list_in_quotes = ['\'' + w + '\'' for w in words_list]
+
+        words_list_in_quotes = ['\'' + re.sub("'","\\'", w) + '\'' for w in words_list]
         words_dict = {}
         for i in range(len(words_list)):
             words_dict[words_list[i]] = words_list_in_quotes[i]
@@ -430,15 +471,13 @@ def res_query(query):
         result = list(result)
 
         for doc_id in result:
-            data.append(get_data_by_docid(doc_id))
+            data.append(get_data_by_docid(doc_id, words_list))
 
         db.disconnect()
         return create_res_obj(data)
-
     except Exception as e:
-        print e.message
-        print traceback.format_exc()
-        return json.dumps({'msg': 'False', 'error': e.args, 'traceback': traceback.format_exc()})
+        return create_res_obj({'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+                              success=False)
 
 
 def create_ast_list(num_list):
@@ -475,12 +514,14 @@ def get_doc_list_by_term(term):
     return doc_list
 
 
-def get_data_by_docid(doc_id):
+def get_data_by_docid(doc_id, word_list):
     path = None
     docname = None
     author = None
+    year = None
+    intro = None
     cursor = db.cnx.cursor()
-    query = ("SELECT docname,author,path FROM doc_tbl WHERE docid =%s")
+    query = ("SELECT docname,author,path,year,intro FROM doc_tbl WHERE docid =%s")
     data = (doc_id,)
     cursor.execute(query, data)
     try:
@@ -488,6 +529,8 @@ def get_data_by_docid(doc_id):
         docname = ret[0]
         author = ret[1]
         path = ret[2]
+        year = ret[3]
+        intro = ret[4]
     except:
         pass
     if path is not None:
@@ -495,59 +538,66 @@ def get_data_by_docid(doc_id):
             content = f.read()
     else:
         content = 'Empty'
+    for term in word_list:
+        content = re.sub(r'\b' + term + r'\b', '<b>'+term+'</b>', content,flags=re.IGNORECASE)
     doc_data = {
         "docname": docname,
         "auther": author,
         "path": path,
+        "year": year,
+        "intro": intro,
         "content": content
     }
     return doc_data
 
 
-def delete_doc(doc_path):
+def delete_doc(docname):
     try:
         global db
         db.connect()
         cursor = db.cnx.cursor()
-        if os.path.exists(doc_path):
-            postid_list = []
-            query = ("SELECT docid FROM doc_tbl WHERE path=%s")
-            data = (doc_path,)
+        postid_list = []
+        query = ("SELECT path FROM doc_tbl WHERE docname=%s")
+        data = (docname,)
+        cursor.execute(query, data)
+        doc_path = cursor.fetchone()[0]
+        query = ("SELECT docid FROM doc_tbl WHERE path=%s")
+        data = (doc_path,)
+        cursor.execute(query, data)
+        docid = cursor.fetchone()[0]
+        query = ("SELECT postid FROM postfiletable WHERE docid=%s")
+        data = (docid,)
+        cursor.execute(query, data)
+        for row in cursor:
+            postid_list.append(row[0])
+        for postid in postid_list:
+            query = ("SELECT hit FROM indextable WHERE postid=%s")
+            data = (postid,)
             cursor.execute(query, data)
-            docid = cursor.fetchone()[0]
-            query = ("SELECT postid FROM postfiletable WHERE docid=%s")
-            data = (docid,)
-            cursor.execute(query, data)
-            for row in cursor:
-                postid_list.append(row[0])
-            for postid in postid_list:
-                query = ("SELECT hit FROM indextable WHERE postid=%s")
+            hit = cursor.fetchone()[0]
+            if hit == 1:
+                query = ("DELETE FROM indextable WHERE postid=%s")
                 data = (postid,)
                 cursor.execute(query, data)
-                hit = cursor.fetchone()[0]
-                if hit == 1:
-                    query = ("DELETE FROM indextable WHERE postid=%s")
-                    data = (postid,)
-                    cursor.execute(query, data)
-                    db.cnx.commit()
-                else:
-                    new_hit = hit - 1
-                    query = ("UPDATE `indextable` SET `hit` = {} WHERE `indextable`.`postid` = %s").format(str(new_hit))
-                    data = (postid,)
-                    cursor.execute(query, data)
-                    db.cnx.commit()
-            query = ("DELETE FROM postfiletable WHERE docid=%s")
-            data = (docid,)
-            cursor.execute(query, data)
-            query = ("DELETE FROM doc_tbl WHERE docid=%s")
-            data = (docid,)
-            cursor.execute(query, data)
+                db.cnx.commit()
+            else:
+                new_hit = hit - 1
+                query = ("UPDATE `indextable` SET `hit` = {} WHERE `indextable`.`postid` = %s").format(str(new_hit))
+                data = (postid,)
+                cursor.execute(query, data)
+                db.cnx.commit()
+        query = ("DELETE FROM postfiletable WHERE docid=%s")
+        data = (docid,)
+        cursor.execute(query, data)
+        query = ("DELETE FROM doc_tbl WHERE docid=%s")
+        data = (docid,)
+        cursor.execute(query, data)
+        if os.path.exists(doc_path):
             os.remove(doc_path)
-            db.cnx.commit()
-            db.disconnect()
+        db.cnx.commit()
+        db.disconnect()
 
-            return create_res_obj(data)
+        return create_res_obj(data)
     except Exception as e:
-        print e.message
-        print traceback.format_exc()
-        return json.dumps({'msg': 'False', 'error': e.args, 'traceback': traceback.format_exc()})
+        return create_res_obj({'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+                              success=False)
