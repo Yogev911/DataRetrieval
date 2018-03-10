@@ -5,6 +5,11 @@ import ast
 import re
 import conf
 import textract
+from os import listdir
+from os.path import isfile, join
+import ntpath
+from shutil import copyfile
+
 
 # from dateutil.relativedelta import relativedelta
 
@@ -413,7 +418,7 @@ def res_query(query):
             query = ' '.join(tmp_query.split()).replace(' ', ' OR ')
         quotes_string = re.findall(r'"([^"]*)"', tmp_query)
         if len(quotes_string) == 1:
-            query = query.replace("\"","")
+            query = query.replace("\"", "")
         elif len(quotes_string) > 1:
             if quotes_string:
                 string_with_quotes = ' '.join(tmp_query.split()).replace('AND', '').replace('OR', '').replace('NOT', '')
@@ -434,7 +439,7 @@ def res_query(query):
         tmp_query = tmp_query.lower()
         words_list = tmp_query.split()
 
-        words_list_in_quotes = ['\'' + re.sub("'","\\'", w) + '\'' for w in words_list]
+        words_list_in_quotes = ['\'' + re.sub("'", "\\'", w) + '\'' for w in words_list]
         words_dict = {}
         for i in range(len(words_list)):
             words_dict[words_list[i]] = words_list_in_quotes[i]
@@ -539,7 +544,8 @@ def get_data_by_docid(doc_id, word_list):
     else:
         content = 'Empty'
     for term in word_list:
-        content = re.sub(r'\b' + term + r'\b', '<span style="color:red;font-weight:bold">'+term+'</span>', content,flags=re.IGNORECASE)
+        content = re.sub(r'\b' + term + r'\b', '<span style="color:red;font-weight:bold">' + term + '</span>', content,
+                         flags=re.IGNORECASE)
     doc_data = {
         "docname": docname,
         "auther": author,
@@ -601,3 +607,20 @@ def delete_doc(docname):
     except Exception as e:
         return create_res_obj({'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
                               success=False)
+
+def lisener(tmp_folder):
+    while True:
+        print 'searching for files....'
+        files = [f for f in listdir(tmp_folder) if isfile(join(tmp_folder, f))]
+        if files:
+            print 'found file!'
+            target = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
+            print target
+            for file in files:
+                print 'working on file{}'.format(file)
+                uuid = str(time.time()).split('.')[0]
+                filename = uuid + ntpath.basename(file)
+                path = '/'.join([target, filename])
+                copyfile(file, path)
+                os.remove(file)
+        time.sleep(5)

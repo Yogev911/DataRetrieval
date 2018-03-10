@@ -20,3 +20,5 @@ TEMPLATES = ['#Author name :',
              '#Intro :']
 
 REGEX = re.compile('[^a-zA-Z \']')
+
+TMP_FOLDER = '/Users/yogev/Documents/DataRetrieval/tmp/'

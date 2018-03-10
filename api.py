@@ -9,6 +9,9 @@ import time
 import api_handler
 import conf
 import traceback
+import threading
+import threading
+
 app = Flask(__name__)
 CORS(app)
 
@@ -104,4 +107,8 @@ def yogev():
 
 
 if __name__ == '__main__':
+    try:
+        threading.Thread(target=api_handler.lisener,args=(conf.TMP_FOLDER,)).start()
+    except:
+        print traceback.format_exc()
     app.run()
