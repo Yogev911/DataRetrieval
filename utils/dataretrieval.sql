@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 03, 2018 at 04:05 PM
+-- Generation Time: Mar 10, 2018 at 05:47 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -32,7 +32,9 @@ CREATE TABLE `doc_tbl` (
   `docid` int(11) NOT NULL,
   `docname` varchar(30) NOT NULL,
   `author` varchar(30) NOT NULL,
-  `path` varchar(250) NOT NULL
+  `path` varchar(250) NOT NULL,
+  `year` varchar(250) NOT NULL,
+  `intro` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
