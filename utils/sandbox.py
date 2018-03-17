@@ -5,7 +5,9 @@ def findWholeWord(w):
 
 operator = ['OR', 'AND', 'NOT']
 data = []
+
 query = 'sdfghsd sdfgdf OR sdfghd df AND grg'
+query = query.replace("\"", "")
 
 tmp_query = re.split(r'(OR|AND|NOT)', query) # split to text OP text OP text
 
@@ -14,6 +16,7 @@ for text in tmp_query:
     if text in operator:
         new_query += text + ' '
         continue
+
     if len(text.split()) > 1:
         new_query += '('
         for word in text.split():
