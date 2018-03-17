@@ -10,7 +10,6 @@ import api_handler
 import conf
 import traceback
 import threading
-import threading
 
 app = Flask(__name__)
 CORS(app)
@@ -62,8 +61,44 @@ def delete(filename):
         x = jsonify(x)
         return x
     except Exception as e:
-        return api_handler.create_res_obj({'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
-                      success=False)
+        return api_handler.create_res_obj(
+            {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+            success=False)
+
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete2():
+    if request.method == 'GET':
+        try:
+            print 'tt'
+        except Exception as e:
+            return api_handler.create_res_obj(
+                {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+                success=False)
+
+
+@app.route('/hide/<filename>', methods=['GET', 'POST'])
+def hide(filename):
+    try:
+        x = api_handler.hide_doc(filename)
+        x = jsonify(x)
+        return x
+    except Exception as e:
+        return api_handler.create_res_obj(
+            {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+            success=False)
+
+
+@app.route('/hide', methods=['GET', 'POST'])
+def hide2():
+    if request.method == 'GET':
+        try:
+            print 'tt'
+        except Exception as e:
+            return api_handler.create_res_obj(
+                {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+                success=False)
+
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -82,20 +117,21 @@ def upload():
                 filename = file.filename
                 return_data.append(api_handler.res_upload_file(filename, path))
 
-            errors_only =[]
+            errors_only = []
             for data_block in return_data:
                 if 'traceback' in data_block:
                     errors_only.append(data_block)
             if not errors_only:
                 x = api_handler.create_res_obj(return_data)
             else:
-                x = api_handler.create_res_obj(errors_only,success=False)
+                x = api_handler.create_res_obj(errors_only, success=False)
             return jsonify(x)
         elif request.method == 'GET':
             return redirect(url_for('admin'))
     except Exception as e:
-        return jsonify(api_handler.create_res_obj({'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
-                      success=False))
+        return jsonify(
+            api_handler.create_res_obj({'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+                                       success=False))
 
 
 @app.route("/query", methods=['GET', 'POST'])
@@ -106,9 +142,16 @@ def yogev():
     return jsonify(json.dumps({'msg': 'dude this is POST only!@'}))
 
 
+@app.route("/showall", methods=['GET', 'POST'])
+def showall():
+    if request.method == 'POST':
+        return jsonify(api_handler.get_all_docs())
+    return jsonify(json.dumps({'msg': 'dude this is POST only!@'}))
+
+
 if __name__ == '__main__':
     try:
-        threading.Thread(target=api_handler.lisener,args=(conf.TMP_FOLDER,)).start()
+        threading.Thread(target=api_handler.lisener, args=(conf.TMP_FOLDER,)).start()
     except:
         print traceback.format_exc()
     app.run()

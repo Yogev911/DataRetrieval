@@ -398,6 +398,16 @@ def _insert_row_doc_tbl(docname, author, path, year, intro):
         return docid
 
 
+def list_hidden_files():
+    cursor = db.cnx.cursor()
+    query = "SELECT docid FROM hidden_files "
+    try:
+        cursor.execute(query)
+        return [doc[0] for doc in cursor]
+    except:
+        return []
+
+
 def res_query(query):
     class MyTransformer(ast.NodeTransformer):
         def visit_Str(self, node):
@@ -407,6 +417,7 @@ def res_query(query):
         global db
         db.connect()
         data = []
+        hidden_files = list_hidden_files()
         for term in conf.STOP_LIST:
             query = re.sub(r'\b' + term + r'\b', ' ', query,
                             flags=re.IGNORECASE)
@@ -447,7 +458,6 @@ def res_query(query):
         words_dict = {}
         for i in range(len(words_list)):
             words_dict[words_list[i]] = words_list_in_quotes[i]
-
         processed_query = ''
         for item in query.split():
             if item.lower() in words_dict:
@@ -464,7 +474,7 @@ def res_query(query):
                 processed_query += item
             processed_query += ' '
         for k, v in words_dict.iteritems():
-            doc_list = get_doc_list_by_term(k)
+            doc_list = get_doc_list_by_term(k,hidden_files)
             ast_list = create_ast_list(doc_list)
             words_dict[k] = ast_list
 
@@ -498,7 +508,7 @@ def create_ast_list(num_list):
     return l
 
 
-def get_doc_list_by_term(term):
+def get_doc_list_by_term(term,hidden_files):
     postid = None
     doc_list = []
     cursor = db.cnx.cursor()
@@ -520,7 +530,9 @@ def get_doc_list_by_term(term):
             doc_list.append(row[0])
     except:
         pass
-    return doc_list
+
+    new_list = [doc for doc in doc_list if doc not in hidden_files]
+    return new_list
 
 
 def get_data_by_docid(doc_id, word_list):
@@ -547,8 +559,12 @@ def get_data_by_docid(doc_id, word_list):
             content = f.read()
     else:
         content = 'Empty'
+    content = re.sub(r'^'+conf.TEMPLATES[0]+'.*\n?', '', content, flags=re.MULTILINE)
+    content = re.sub(r'^'+conf.TEMPLATES[1]+'.*\n?', '', content, flags=re.MULTILINE)
+    content = re.sub(r'^'+conf.TEMPLATES[2]+'.*\n?', '', content, flags=re.MULTILINE)
+
     for term in word_list:
-        content = re.sub(r'\b' + term + r'\b', '<span style="color:red;font-weight:bold">' + term + '</span>', content,
+        content = re.sub(r'\b' + term + r'\b', '<span class="mark">' + term + '</span>', content,
                          flags=re.IGNORECASE)
     doc_data = {
         "docname": docname,
@@ -632,3 +648,63 @@ def lisener(tmp_folder):
                 res_upload_file(file, target_path)
                 os.remove(path)
         time.sleep(5)
+
+
+def hide_doc(docname):
+    try:
+        global db
+        db.connect()
+        cursor = db.cnx.cursor()
+
+        query = ("SELECT docid FROM doc_tbl WHERE docname=%s")
+        data = (docname,)
+        cursor.execute(query, data)
+        docid = cursor.fetchone()[0]
+
+        query = ("SELECT * FROM hidden_files WHERE docid = %s")
+        data = (docid,)
+        cursor.execute(query, data)
+        row_count = cursor.rowcount
+        if row_count == -1:
+            x = cursor.fetchall()
+            cursor = db.cnx.cursor()
+            query = ("INSERT INTO hidden_files (docid) VALUES (%s)")
+            data = (docid,)
+            cursor.execute(query, data)
+            db.cnx.commit()
+            data = [{'file_hidden': 'True'}]
+        else:
+            data = [{'file_hidden': 'False'}]
+        db.disconnect()
+
+        return create_res_obj(data)
+    except Exception as e:
+        return create_res_obj({'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+                              success=False)
+
+
+def get_all_docs():
+    try:
+        global db
+        db.connect()
+        data = []
+        cursor = db.cnx.cursor()
+        query = "SELECT * FROM doc_tbl"
+        cursor.execute(query)
+        for row in cursor:
+            data.append({
+                'docid': row[0],
+                'docname' : row[1],
+                'author' : row[2],
+                'path' : row[3],
+                'year' : row[4],
+                'intro' : row[5],
+                'content' : open(row[3], 'r').read()
+
+            })
+
+        db.disconnect()
+        return create_res_obj(data)
+    except Exception as e:
+        return create_res_obj({'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+                              success=False)
