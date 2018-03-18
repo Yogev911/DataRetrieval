@@ -384,7 +384,7 @@ def _insert_row_doc_tbl(docname, author, path, year, intro):
     if docid:
         return docid
     else:
-        query = ("INSERT INTO doc_tbl (docname, author,path, year, intro, hidden) VALUES (%s , %s , %s, %s , %s)")
+        query = ("INSERT INTO doc_tbl (docname, author,path, year, intro, hidden) VALUES (%s , %s , %s, %s , %s,%s)")
         data = (docname, author, path, year, intro,0)
         cursor.execute(query, data)
         db.cnx.commit()
@@ -746,8 +746,8 @@ def hide_doc(docname):
             query = ("INSERT INTO hidden_files (docid) VALUES (%s)")
             data = (docid,)
             cursor.execute(query, data)
-            query = ("UPDATE hidden_files SET hidden = %s WHERE docid = %s ")
-            data = (1,docid,)
+            query = ("UPDATE doc_tbl SET hidden = 1 WHERE docid = %s ")
+            data = (docid,)
             cursor.execute(query, data)
             db.cnx.commit()
             data = [{'file_hidden': 'True'}]

@@ -23,7 +23,7 @@ REGEX = re.compile('[^a-zA-Z \']')
 
 TMP_FOLDER = '/Users/yogev/Documents/DataRetrieval/tmp/'
 
-STOP_LIST = ['two']
+STOP_LIST = ['two','yogev','heskia']
 
 HIDDEN_FILES_ID = [12]
 
