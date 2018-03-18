@@ -144,4 +144,4 @@ if __name__ == '__main__':
         threading.Thread(target=api_handler.lisener, args=(conf.TMP_FOLDER,)).start()
     except:
         print traceback.format_exc()
-    app.run()
+    app.run(host='30.30.36.164')
