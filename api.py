@@ -10,6 +10,7 @@ import api_handler
 import conf
 import traceback
 import threading
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
 CORS(app)
@@ -66,17 +67,6 @@ def delete(filename):
             success=False)
 
 
-@app.route('/delete', methods=['GET', 'POST'])
-def delete2():
-    if request.method == 'GET':
-        try:
-            print 'tt'
-        except Exception as e:
-            return api_handler.create_res_obj(
-                {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
-                success=False)
-
-
 @app.route('/hide/<filename>', methods=['GET', 'POST'])
 def hide(filename):
     try:
@@ -89,16 +79,16 @@ def hide(filename):
             success=False)
 
 
-@app.route('/hide', methods=['GET', 'POST'])
-def hide2():
-    if request.method == 'GET':
-        try:
-            print 'tt'
-        except Exception as e:
-            return api_handler.create_res_obj(
-                {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
-                success=False)
-
+@app.route('/restore/<filename>', methods=['GET', 'POST'])
+def restore(filename):
+    try:
+        x = api_handler.restore_doc(filename)
+        x = jsonify(x)
+        return x
+    except Exception as e:
+        return api_handler.create_res_obj(
+            {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+            success=False)
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
