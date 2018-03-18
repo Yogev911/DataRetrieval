@@ -162,7 +162,7 @@ def res_upload_file(file_name, path):
         # init_db()
         update_words_to_db(values['words_dict'], file_name, path, values['author'], values['year'], values['intro'])
         db.disconnect()
-        return {'msg': 'got it!', 'filename': file_name, 'path': path, 'author': values['author'],
+        return {'msg': 'got it!', 'docname': file_name, 'path': path, 'author': values['author'],
                 'year': values['year'], 'intro': values['intro'], 'content': text}
     except Exception as e:
         return {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)}
