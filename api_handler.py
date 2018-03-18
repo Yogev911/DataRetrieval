@@ -150,6 +150,9 @@ def init_db():
     query = "ALTER TABLE postfiletable AUTO_INCREMENT = 1"
     cursor.execute(query)
     db.cnx.commit()
+    query = "DELETE FROM `hidden_files`"
+    cursor.execute(query)
+    db.cnx.commit()
 
 
 def res_upload_file(file_name, path):
@@ -381,8 +384,8 @@ def _insert_row_doc_tbl(docname, author, path, year, intro):
     if docid:
         return docid
     else:
-        query = ("INSERT INTO doc_tbl (docname, author,path, year, intro) VALUES (%s , %s , %s, %s , %s)")
-        data = (docname, author, path, year, intro)
+        query = ("INSERT INTO doc_tbl (docname, author,path, year, intro, hidden) VALUES (%s , %s , %s, %s , %s)")
+        data = (docname, author, path, year, intro,0)
         cursor.execute(query, data)
         db.cnx.commit()
         query = ("SELECT docid FROM doc_tbl WHERE path=%s")
@@ -605,16 +608,18 @@ def get_data_by_docid(doc_id, word_list):
     year = None
     intro = None
     cursor = db.cnx.cursor()
-    query = ("SELECT docname,author,path,year,intro FROM doc_tbl WHERE docid =%s")
+    query = ("SELECT docid,docname,author,path,year,intro, hidden FROM doc_tbl WHERE docid =%s")
     data = (doc_id,)
     cursor.execute(query, data)
     try:
         ret = cursor.fetchone()
-        docname = ret[0]
-        author = ret[1]
-        path = ret[2]
-        year = ret[3]
-        intro = ret[4]
+        docid = ret[0]
+        docname = ret[1]
+        author = ret[2]
+        path = ret[3]
+        year = ret[4]
+        intro = ret[5]
+        hidden = ret[6]
     except:
         pass
     if path is not None:
@@ -630,12 +635,15 @@ def get_data_by_docid(doc_id, word_list):
         content = re.sub(r'\b' + term + r'\b', '<span class="mark">' + term + '</span>', content,
                          flags=re.IGNORECASE)
     doc_data = {
+        "docid" : docid,
         "docname": docname,
         "auther": author,
         "path": path,
         "year": year,
         "intro": intro,
+        "hidden" : hidden,
         "content": content
+
     }
     return doc_data
 
@@ -679,6 +687,9 @@ def delete_doc(docname):
         data = (docid,)
         cursor.execute(query, data)
         query = ("DELETE FROM doc_tbl WHERE docid=%s")
+        data = (docid,)
+        cursor.execute(query, data)
+        query = ("DELETE FROM hidden_files WHERE docid=%s")
         data = (docid,)
         cursor.execute(query, data)
         if os.path.exists(doc_path):
@@ -735,6 +746,9 @@ def hide_doc(docname):
             query = ("INSERT INTO hidden_files (docid) VALUES (%s)")
             data = (docid,)
             cursor.execute(query, data)
+            query = ("UPDATE hidden_files SET hidden = %s WHERE docid = %s ")
+            data = (1,docid,)
+            cursor.execute(query, data)
             db.cnx.commit()
             data = [{'file_hidden': 'True'}]
         else:
@@ -763,6 +777,7 @@ def get_all_docs():
                 'path': row[3],
                 'year': row[4],
                 'intro': row[5],
+                'hidden': row[6],
                 'content': open(row[3], 'r').read()
 
             })

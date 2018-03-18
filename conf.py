@@ -26,3 +26,5 @@ TMP_FOLDER = '/Users/yogev/Documents/DataRetrieval/tmp/'
 STOP_LIST = ['two']
 
 HIDDEN_FILES_ID = [12]
+
+HOST='0.0.0.0'

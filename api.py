@@ -40,9 +40,13 @@ def admin():
 
 @app.route('/init', methods=['GET', 'POST'])
 def init():
-    api_handler.init_db()
-    return api_handler.create_res_obj([])
-
+    try:
+        api_handler.init_db()
+        return api_handler.create_res_obj({'status' : 'init success'})
+    except Exception as e:
+        return api_handler.create_res_obj(
+            {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+            success=False)
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
@@ -144,4 +148,4 @@ if __name__ == '__main__':
         threading.Thread(target=api_handler.lisener, args=(conf.TMP_FOLDER,)).start()
     except:
         print traceback.format_exc()
-    app.run(host='30.30.36.164')
+    app.run(host=conf.HOST)

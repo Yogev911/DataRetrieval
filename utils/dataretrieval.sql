@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 17, 2018 at 10:02 PM
+-- Generation Time: Mar 18, 2018 at 06:22 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -34,7 +34,8 @@ CREATE TABLE `doc_tbl` (
   `author` varchar(30) NOT NULL,
   `path` varchar(250) NOT NULL,
   `year` varchar(250) NOT NULL,
-  `intro` varchar(250) NOT NULL
+  `intro` varchar(250) NOT NULL,
+  `hidden` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -46,14 +47,6 @@ CREATE TABLE `doc_tbl` (
 CREATE TABLE `hidden_files` (
   `docid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `hidden_files`
---
-
-INSERT INTO `hidden_files` (`docid`) VALUES
-(3),
-(12);
 
 -- --------------------------------------------------------
 
