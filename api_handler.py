@@ -160,12 +160,10 @@ def res_upload_file(file_name, path):
         global db
         db.connect()
         text = parse_file(path)
-        print text
         values = parse_text_to_dict(text)
-        # init_db()
-        update_words_to_db(values['words_dict'], file_name, path, values['author'], values['year'], values['intro'])
+        doc_id = update_words_to_db(values['words_dict'], file_name, path, values['author'], values['year'], values['intro'])
         db.disconnect()
-        return {'msg': 'got it!', 'docname': file_name, 'path': path, 'author': values['author'],
+        return {'docid': doc_id, 'docname': file_name, 'path': path, 'author': values['author'],
                 'year': values['year'], 'intro': values['intro'], 'content': text}
     except Exception as e:
         return {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)}
@@ -260,13 +258,28 @@ def parse_docx(filename):
     return '\n'.join(fullText)
 
 
-def update_words_to_db(words_dict, file_name, path, author, year, intro):
-    if _is_duplicated_file(file_name):
-        return 'file is already indexd'
-    for key in sorted(words_dict.iterkeys()): _update_word(key, words_dict[key], file_name, path,
-                                                           author, year, intro)
-    pass
+def _get_doc_id_by_file_name(docname):
+    docid = None
+    print "working on {}".format(docname)
+    cursor = db.cnx.cursor()
+    query = ("SELECT docid FROM doc_tbl WHERE docname=%s")
+    data = (docname,)
+    cursor.execute(query, data)
+    try:
+        ret = cursor.fetchone()
+        docid = ret[0]
+    except:
+        pass
+    if docid:
+        return docid
+    return 0
 
+
+def update_words_to_db(words_dict, file_name, path, author, year, intro):
+    if not _is_duplicated_file(file_name):
+        for key in sorted(words_dict.iterkeys()): _update_word(key, words_dict[key], file_name, path,
+                                                           author, year, intro)
+    return _get_doc_id_by_file_name(file_name)
 
 def _is_duplicated_file(docname):
     docid = None

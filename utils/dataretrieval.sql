@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `doc_tbl` (
   `docid` int(11) NOT NULL,
-  `docname` varchar(30) NOT NULL,
-  `author` varchar(30) NOT NULL,
+  `docname` varchar(250) NOT NULL,
+  `author` varchar(250) NOT NULL,
   `path` varchar(250) NOT NULL,
   `year` varchar(250) NOT NULL,
   `intro` varchar(250) NOT NULL,
