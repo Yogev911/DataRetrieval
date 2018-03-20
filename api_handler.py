@@ -728,11 +728,12 @@ def delete_doc(docname):
 
 
 def lisener(tmp_folder):
-    target_tmp = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tmp')
-
+    target_tmp = os.path.join(os.path.dirname(os.path.abspath(__file__)), tmp_folder)
+    if not os.path.exists(target_tmp):
+        os.makedirs(target_tmp)
     while True:
         print 'searching for files....'
-        files = [f for f in listdir(tmp_folder) if isfile(join(tmp_folder, f))]
+        files = [f for f in listdir(target_tmp) if isfile(os.path.join(target_tmp, f))]
         if files:
             print 'found file!'
             target = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
@@ -742,7 +743,8 @@ def lisener(tmp_folder):
                 print 'working on file{}'.format(path)
                 uuid = str(time.time()).split('.')[0]
                 filename = uuid + file
-                target_path = '/'.join([target, filename])
+                target_path =os.path.join(target,filename)
+                # target_path = '/'.join([target, filename])
                 copyfile(path, target_path)
                 res_upload_file(file, target_path)
                 os.remove(path)
