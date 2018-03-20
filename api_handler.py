@@ -509,21 +509,32 @@ def res_query(query):
                 tmp_word = word.replace(')', '').replace('(', '').replace('"', '')
                 if term == tmp_word:
                     if word[0] == '\"' and word[-1] == '\"':
-                        quotes_words_indexs = [(m.start(0) + 1, m.end(0) - 2) for m in
-                                               re.finditer(r'\b \"{}\" \b'.format(term), query)]
+                        quotes_words_indexs = [(m.start(0), m.end(0)) for m in re.finditer(r'\b{}\b'.format(term), query)]
                         if quotes_words_indexs:
-                            # for uncover_word in quotes_words_indexs:
-                            query = query[:quotes_words_indexs[0][0]] + ' ' + query[quotes_words_indexs[0][0] + 1:]
-                            query = query[:quotes_words_indexs[0][1]] + ' ' + query[quotes_words_indexs[0][1] + 1:]
+                            for tup in quotes_words_indexs:
+                                if query[tup[0] - 1] == '\"' and query[tup[1]] =='\"' :
+                                    query = query[:tup[0]-1] + '$' + query[tup[0]:]
+                                    query = query[:tup[1]] + '$' + query[tup[1]+1:]
+                                    break
+                                else:
+                                    continue
                     else:
-                        quotes_words_indexs = [(m.start(0) + 1, m.end(0) - 2) for m in
-                                               re.finditer(r'\b {} \b'.format(tmp_word), query)]
+                        quotes_words_indexs = [(m.start(0), m.end(0)) for m in re.finditer(r'\b{}\b'.format(tmp_word), query)]
                         # query = new_query.replace(tmp_word, 'STOPPED')
-                        query = query[:quotes_words_indexs[0][0]] + ' stoppedword ' + query[
-                                                                                      quotes_words_indexs[0][1] + 1:]
+                        for tup in quotes_words_indexs:
+                            if query[tup[0] - 1] == '$':
+                                continue
+                            else:
+                                start = query[:tup[0]]
+                                mid = ' stoppedword '
+                                end = query[tup[1] + 1:]
+                                query_helper = start + mid + end
+                                query = query_helper
+                                break
+
             quotes_words_indexs = []
         query = re.sub(' +', ' ', query)
-
+        query = query.replace('$',' ')
         tmp_query = query.replace(')', '').replace('(', '').replace('AND', '').replace('OR', '').replace('NOT', '')
         tmp_query = tmp_query.lower()
         words_list = tmp_query.split()
