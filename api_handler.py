@@ -260,7 +260,7 @@ def parse_docx(filename):
 
 def _get_doc_id_by_file_name(docname):
     docid = None
-    print "working on {}".format(docname)
+    # print "working on {}".format(docname)
     cursor = db.cnx.cursor()
     query = ("SELECT docid FROM doc_tbl WHERE docname=%s")
     data = (docname,)
@@ -831,5 +831,32 @@ def restore_doc(docname):
 
         return create_res_obj(data)
     except Exception as e:
+        return create_res_obj({'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+                              success=False)
+
+
+def getfile(docname):
+    global db
+    db.connect()
+    cursor = db.cnx.cursor()
+    query = ("SELECT * FROM doc_tbl WHERE docname=%s")
+    data = (docname,)
+    cursor.execute(query, data)
+    try:
+        row = cursor.fetchone()
+        db.disconnect()
+        return create_res_obj({
+                'docid': row[0],
+                'docname': row[1],
+                'author': row[2],
+                'path': row[3],
+                'year': row[4],
+                'intro': row[5],
+                'hidden': row[6],
+                'content': open(row[3], 'r').read()
+
+            })
+
+    except:
         return create_res_obj({'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
                               success=False)

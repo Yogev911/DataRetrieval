@@ -42,11 +42,12 @@ def admin():
 def init():
     try:
         api_handler.init_db()
-        return api_handler.create_res_obj({'status' : 'init success'})
+        return api_handler.create_res_obj({'status': 'init success'})
     except Exception as e:
         return api_handler.create_res_obj(
             {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
             success=False)
+
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
@@ -93,6 +94,19 @@ def restore(filename):
         return api_handler.create_res_obj(
             {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
             success=False)
+
+
+@app.route('/getfile/<filename>', methods=['GET', 'POST'])
+def getfile(filename):
+    try:
+        x = api_handler.getfile(filename)
+        x = jsonify(x)
+        return x
+    except Exception as e:
+        return api_handler.create_res_obj(
+            {'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
+            success=False)
+
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
