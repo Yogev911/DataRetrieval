@@ -199,9 +199,9 @@ def index_text(text):
 
 
 def parse_text_to_dict(text):
-    author = 'None'
-    year = 'None'
-    intro = 'None'
+    author = ''
+    year = ''
+    intro = ''
     words_dict = {}
     for line in text.split('\n'):
         if line.startswith(conf.TEMPLATES[0]):
