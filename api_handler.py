@@ -834,6 +834,9 @@ def restore_doc(docname):
             query = ("DELETE FROM hidden_files WHERE docid = %s")
             data = (docid,)
             cursor.execute(query, data)
+            query = ("UPDATE doc_tbl SET hidden = 0 WHERE docid = %s ")
+            data = (docid,)
+            cursor.execute(query, data)
             db.cnx.commit()
             data = [{'file_restored': 'True'}]
         else:
