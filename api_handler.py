@@ -645,19 +645,22 @@ def res_query(query):
 
         wcard_words_dict = dict(words_dict)
         for k, v in words_dict.iteritems():
-            if k == 'stoppedword':
-                ast_list = create_ast_list([])
-            else:
-                get_doc_list_by_term(k, hidden_files,wcard_words_dict)
+            get_doc_list_by_term(k, hidden_files, wcard_words_dict)
+            # if k == 'stoppedword':
+            #     ast_list = create_ast_list([])
+            # else:
+            #     get_doc_list_by_term(k, hidden_files,wcard_words_dict)
                 # ast_list = create_ast_list(doc_list)
             # words_dict[k] = ast_list
 
-        print wcard_words_dict
+        # print wcard_words_dict
         regex = re.compile('[^a-zA-Z \']')
         wcard_words_dict = {k: v for k, v in wcard_words_dict.items() if k == regex.sub('', k)}
-
+        # wcard_words_dict = {k: v for k, v in wcard_words_dict.items() if k != 'stoppedword'}
         words_dict = dict(wcard_words_dict)
         processed_query = processed_query.replace('*','')
+        processed_query = processed_query.replace('\"','')
+
         processed_query = processed_query.replace('AND', '&')
         processed_query = processed_query.replace('OR', '|')
         processed_query = processed_query.replace('NOT', '-')
@@ -697,12 +700,15 @@ def create_ast_list(num_list):
 
 def get_doc_list_by_term(term, hidden_files,wcard_words_dict):
     regex = re.compile('[^a-zA-Z \']')
-
+    if term == 'stoppedword':
+        wcard_words_dict[term] = create_ast_list([])
+        return
     postid = None
     doc_list = []
     new_words = []
     post_ids = []
     term = term.replace('*','%')
+    term = term.replace('\"','')
     cursor = db.cnx.cursor()
     query = ("SELECT postid,term FROM indextable WHERE term LIKE %s")
     data = (term,)
@@ -736,7 +742,10 @@ def get_doc_list_by_term(term, hidden_files,wcard_words_dict):
     doc_list = list(set(new_list))
 
     for word in new_words:
-        wcard_words_dict[word] = create_ast_list(doc_list)
+        if word == 'stoppedword':
+            wcard_words_dict[word] = create_ast_list([])
+        else:
+            wcard_words_dict[word] = create_ast_list(doc_list)
     return
 
 
