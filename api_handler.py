@@ -573,7 +573,7 @@ def res_query(query):
             if text in operator:
                 new_query += text + ' '
                 continue
-            if len(text.split()) > 1:
+            if len(text.replace('(','').replace(')','').split()) > 1:
                 new_query += '('
                 for word in text.split():
                     new_query += word + ' OR '
@@ -643,14 +643,21 @@ def res_query(query):
                 processed_query += item
             processed_query += ' '
 
+        wcard_words_dict = dict(words_dict)
         for k, v in words_dict.iteritems():
             if k == 'stoppedword':
                 ast_list = create_ast_list([])
             else:
-                doc_list = get_doc_list_by_term(k, hidden_files)
-                ast_list = create_ast_list(doc_list)
-            words_dict[k] = ast_list
+                get_doc_list_by_term(k, hidden_files,wcard_words_dict)
+                # ast_list = create_ast_list(doc_list)
+            # words_dict[k] = ast_list
 
+        print wcard_words_dict
+        regex = re.compile('[^a-zA-Z \']')
+        wcard_words_dict = {k: v for k, v in wcard_words_dict.items() if k == regex.sub('', k)}
+
+        words_dict = dict(wcard_words_dict)
+        processed_query = processed_query.replace('*','')
         processed_query = processed_query.replace('AND', '&')
         processed_query = processed_query.replace('OR', '|')
         processed_query = processed_query.replace('NOT', '-')
@@ -666,8 +673,11 @@ def res_query(query):
         sorted_by_rank = sorted(ranked_doc, key=lambda tup: tup[1])
         sorted_docit = [tup[0] for tup in sorted_by_rank]
         sorted_docit = sorted_docit[::-1]
+        new_word_list = []
+        for k,v in wcard_words_dict.iteritems():
+            new_word_list.append(k)
         for doc_id in sorted_docit:
-            data.append(get_data_by_docid(doc_id, words_list))
+            data.append(get_data_by_docid(doc_id, new_word_list))
 
         db.disconnect()
         return create_res_obj(data)
@@ -685,31 +695,50 @@ def create_ast_list(num_list):
     return l
 
 
-def get_doc_list_by_term(term, hidden_files):
+def get_doc_list_by_term(term, hidden_files,wcard_words_dict):
+    regex = re.compile('[^a-zA-Z \']')
+
     postid = None
     doc_list = []
+    new_words = []
+    post_ids = []
+    term = term.replace('*','%')
     cursor = db.cnx.cursor()
-    query = ("SELECT postid FROM indextable WHERE term=%s")
+    query = ("SELECT postid,term FROM indextable WHERE term LIKE %s")
     data = (term,)
     cursor.execute(query, data)
     try:
-        ret = cursor.fetchone()
-        postid = ret[0]
-    except:
-        pass
-    if postid is None:
-        return doc_list
-    query = ("SELECT docid FROM postfiletable WHERE postid=%s")
-    data = (postid,)
-    cursor.execute(query, data)
-    try:
+        # post_ids = [row[0] for row in cursor]
+        # new_words = [row[1] for row in cursor]
         for row in cursor:
-            doc_list.append(row[0])
+            post_ids.append(row[0])
+            new_words.append(row[1])
+        # for word in new_words:
+        #     if word not in wcard_words_dict:
+        #         wcard_words_dict[regex.sub('', word)] = '\"{}\"'.format(regex.sub('', word))
+        # ret = cursor.fetchone()
+        # postid = ret[0]
     except:
         pass
+    if post_ids is None:
+        return doc_list
+    for postid in post_ids:
+        query = ("SELECT docid FROM postfiletable WHERE postid=%s")
+        data = (postid,)
+        cursor.execute(query, data)
+        try:
+            for row in cursor:
+                doc_list.append(row[0])
+        except:
+            pass
 
     new_list = [doc for doc in doc_list if doc not in hidden_files]
-    return new_list
+    doc_list = list(set(new_list))
+
+    for word in new_words:
+        wcard_words_dict[word] = create_ast_list(doc_list)
+    return
+
 
 
 def get_data_by_docid(doc_id, word_list):
