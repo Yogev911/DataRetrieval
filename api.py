@@ -3,14 +3,12 @@ from werkzeug.utils import secure_filename
 from werkzeug.datastructures import ImmutableMultiDict
 from flask_cors import CORS
 from flask import Flask, request, jsonify, render_template, redirect, url_for
-from api_handler import db_handler
 import os
 import time
 import api_handler
 import conf
 import traceback
 import threading
-from flask_socketio import SocketIO
 
 app = Flask(__name__)
 CORS(app)

@@ -703,6 +703,7 @@ def get_doc_list_by_term(term, hidden_files,wcard_words_dict):
     if term == 'stoppedword':
         wcard_words_dict[term] = create_ast_list([])
         return
+
     postid = None
     doc_list = []
     new_words = []
