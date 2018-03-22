@@ -22,6 +22,7 @@ TEMPLATES = ['#Author name :',
 REGEX = re.compile('[^a-zA-Z \']')
 
 TMP_FOLDER = 'tmp'
+UPLOAD_FOLDER = 'uploads'
 
 STOP_LIST = ['two','yogev','heskia']
 

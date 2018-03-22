@@ -10,7 +10,6 @@ import api_handler
 import conf
 import traceback
 import threading
-from flask_socketio import SocketIO
 
 app = Flask(__name__)
 CORS(app)

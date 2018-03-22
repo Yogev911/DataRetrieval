@@ -153,6 +153,14 @@ def init_db():
     query = "DELETE FROM `hidden_files`"
     cursor.execute(query)
     db.cnx.commit()
+    target_uploads = os.path.join(os.path.dirname(os.path.abspath(__file__)), conf.UPLOAD_FOLDER)
+    files = [f for f in listdir(target_uploads) if isfile(os.path.join(target_uploads, f))]
+    if files:
+        for file in files:
+            path = os.path.join(target_uploads, file)
+            print 'delete file {}'.format(path)
+            os.remove(path)
+    print 'folder {} is empty'.format(target_uploads)
 
 
 def res_upload_file(file_name, path):
@@ -161,7 +169,8 @@ def res_upload_file(file_name, path):
         db.connect()
         text = parse_file(path)
         values = parse_text_to_dict(text)
-        doc_id = update_words_to_db(values['words_dict'], file_name, path, values['author'], values['year'], values['intro'])
+        doc_id = update_words_to_db(values['words_dict'], file_name, path, values['author'], values['year'],
+                                    values['intro'])
         db.disconnect()
         return {'docid': doc_id, 'docname': file_name, 'path': path, 'author': values['author'],
                 'year': values['year'], 'intro': values['intro'], 'content': text}
@@ -278,8 +287,9 @@ def _get_doc_id_by_file_name(docname):
 def update_words_to_db(words_dict, file_name, path, author, year, intro):
     if not _is_duplicated_file(file_name):
         for key in sorted(words_dict.iterkeys()): _update_word(key, words_dict[key], file_name, path,
-                                                           author, year, intro)
+                                                               author, year, intro)
     return _get_doc_id_by_file_name(file_name)
+
 
 def _is_duplicated_file(docname):
     docid = None
@@ -398,7 +408,7 @@ def _insert_row_doc_tbl(docname, author, path, year, intro):
         return docid
     else:
         query = ("INSERT INTO doc_tbl (docname, author,path, year, intro, hidden) VALUES (%s , %s , %s, %s , %s,%s)")
-        data = (docname, author, path, year, intro,0)
+        data = (docname, author, path, year, intro, 0)
         cursor.execute(query, data)
         db.cnx.commit()
         query = ("SELECT docid FROM doc_tbl WHERE path=%s")
@@ -431,11 +441,64 @@ def is_in_order(arg1, arg2, list):
     any([arg1, arg2] == list[i:i + 2] for i in xrange(len(list) - 1))
 
 
+
+
+    def _get_doc_hits(word):
+        try:
+            ret = None
+            cursor = db.cnx.cursor()
+            query = ("SELECT hit FROM indextable WHERE term=%s")
+            data = (word,)
+            cursor.execute(query, data)
+            ret = cursor.fetchone()
+            if ret:
+                return ret[0]
+            return 0
+        except:
+            return 0
+
+
+def _get_post_id_by_term(word):
+    try:
+        cursor = db.cnx.cursor()
+        query = ("SELECT postid FROM indextable WHERE term=%s")
+        data = (word,)
+        cursor.execute(query, data)
+        ret = cursor.fetchone()
+        try:
+            cursor.fetchall()
+        except:
+            pass
+        return ret[0]
+    except:
+        return 0
+
+def _get_word_weight(doc, words):
+    try:
+        doc_weight = 0
+        post_ids = [_get_post_id_by_term(word) for word in words]
+        for postid in post_ids:
+            query = ("SELECT hit FROM postfiletable WHERE postid=%s and docid =%s")
+            data = (postid,doc,)
+            cursor = db.cnx.cursor()
+            cursor.execute(query, data)
+            ret = cursor.fetchone()
+            doc_weight += ret[0]
+            try:
+                cursor.fetchall()
+            except:
+                pass
+        return doc,doc_weight
+    except:
+        return doc,0
+
+def _rank(docs, words_list):
+    ranking = [_get_word_weight(doc, words_list) for doc in docs]
+    return ranking
 def res_query(query):
     class MyTransformer(ast.NodeTransformer):
         def visit_Str(self, node):
             return ast.Set(words_dict[node.s])
-
     try:
         global db
         db.connect()
@@ -493,6 +556,7 @@ def res_query(query):
                 new_query += text + ' '
                 continue
             if len(text.split()) > 1:
+            # if len(text.replace('(', '').replace(')', '').split()) > 1:
                 new_query += '('
                 for word in text.split():
                     new_query += word + ' OR '
@@ -512,14 +576,15 @@ def res_query(query):
                         quotes_words_indexs = [(m.start(0), m.end(0)) for m in re.finditer(r'\b{}\b'.format(term), query)]
                         if quotes_words_indexs:
                             for tup in quotes_words_indexs:
-                                if query[tup[0] - 1] == '\"' and query[tup[1]] =='\"' :
-                                    query = query[:tup[0]-1] + '$' + query[tup[0]:]
-                                    query = query[:tup[1]] + '$' + query[tup[1]+1:]
+                                if query[tup[0] - 1] == '\"' and query[tup[1]] == '\"':
+                                    query = query[:tup[0] - 1] + '$' + query[tup[0]:]
+                                    query = query[:tup[1]] + '$' + query[tup[1] + 1:]
                                     break
                                 else:
                                     continue
                     else:
-                        quotes_words_indexs = [(m.start(0), m.end(0)) for m in re.finditer(r'\b{}\b'.format(tmp_word), query)]
+                        quotes_words_indexs = [(m.start(0), m.end(0)) for m in
+                                               re.finditer(r'\b{}\b'.format(tmp_word), query)]
                         # query = new_query.replace(tmp_word, 'STOPPED')
                         for tup in quotes_words_indexs:
                             if query[tup[0] - 1] == '$':
@@ -534,7 +599,9 @@ def res_query(query):
 
             quotes_words_indexs = []
         query = re.sub(' +', ' ', query)
-        query = query.replace('$',' ')
+        query = query.replace('$', ' ')
+        #careful
+        query = query.replace('\"', '')
         tmp_query = query.replace(')', '').replace('(', '').replace('AND', '').replace('OR', '').replace('NOT', '')
         tmp_query = tmp_query.lower()
         words_list = tmp_query.split()
@@ -560,6 +627,8 @@ def res_query(query):
                 processed_query += item
             processed_query += ' '
 
+        print words_dict
+        print words_list
         for k, v in words_dict.iteritems():
             if k == 'stoppedword':
                 ast_list = create_ast_list([])
@@ -568,6 +637,9 @@ def res_query(query):
                 ast_list = create_ast_list(doc_list)
             words_dict[k] = ast_list
 
+        words_dict = dict({k.replace('*',''): v for k, v in words_dict.items()})
+        words_list = list([word.replace('*','') for word in words_list])
+        processed_query = processed_query.replace('*','')
         processed_query = processed_query.replace('AND', '&')
         processed_query = processed_query.replace('OR', '|')
         processed_query = processed_query.replace('NOT', '-')
@@ -578,7 +650,11 @@ def res_query(query):
         code = compile(fixed, '<string>', 'eval')
         result = eval(code)
         result = list(result)
-
+        ranked_doc = _rank(result, words_list)
+        sorted_by_rank = sorted(ranked_doc, key=lambda tup: tup[1])
+        sorted_docit = [tup[0] for tup in sorted_by_rank]
+        sorted_docit = sorted_docit[::-1]
+        result = sorted_docit
         for doc_id in result:
             data.append(get_data_by_docid(doc_id, words_list))
 
@@ -600,26 +676,34 @@ def create_ast_list(num_list):
 
 def get_doc_list_by_term(term, hidden_files):
     postid = None
+    term = term.replace('*', '%')
     doc_list = []
     cursor = db.cnx.cursor()
-    query = ("SELECT postid FROM indextable WHERE term=%s")
+    query = ("SELECT postid,term FROM indextable WHERE term LIKE %s")
     data = (term,)
     cursor.execute(query, data)
-    try:
-        ret = cursor.fetchone()
-        postid = ret[0]
-    except:
-        pass
-    if postid is None:
-        return doc_list
-    query = ("SELECT docid FROM postfiletable WHERE postid=%s")
-    data = (postid,)
-    cursor.execute(query, data)
+    post_ids =[]
+    new_words = []
     try:
         for row in cursor:
-            doc_list.append(row[0])
+            post_ids.append(row[0])
+            new_words.append(row[1])
+        # ret = cursor.fetchone()
+        # postid = ret[0]
+        # cursor.fetchall()
     except:
         pass
+    for postid in post_ids:
+        if postid is None:
+            return doc_list
+        query = ("SELECT docid FROM postfiletable WHERE postid=%s")
+        data = (postid,)
+        cursor.execute(query, data)
+        try:
+            for row in cursor:
+                doc_list.append(row[0])
+        except:
+            pass
 
     new_list = [doc for doc in doc_list if doc not in hidden_files]
     return new_list
@@ -659,13 +743,13 @@ def get_data_by_docid(doc_id, word_list):
         content = re.sub(r'\b' + term + r'\b', '<span class="mark">' + term + '</span>', content,
                          flags=re.IGNORECASE)
     doc_data = {
-        "docid" : docid,
+        "docid": docid,
         "docname": docname,
         "auther": author,
         "path": path,
         "year": year,
         "intro": intro,
-        "hidden" : hidden,
+        "hidden": hidden,
         "content": content
 
     }
@@ -743,7 +827,7 @@ def lisener(tmp_folder):
                 print 'working on file{}'.format(path)
                 uuid = str(time.time()).split('.')[0]
                 filename = uuid + file
-                target_path =os.path.join(target,filename)
+                target_path = os.path.join(target, filename)
                 # target_path = '/'.join([target, filename])
                 copyfile(path, target_path)
                 res_upload_file(file, target_path)
@@ -862,16 +946,16 @@ def getfile(docname):
         row = cursor.fetchone()
         db.disconnect()
         return create_res_obj({
-                'docid': row[0],
-                'docname': row[1],
-                'author': row[2],
-                'path': row[3],
-                'year': row[4],
-                'intro': row[5],
-                'hidden': row[6],
-                'content': open(row[3], 'r').read()
+            'docid': row[0],
+            'docname': row[1],
+            'author': row[2],
+            'path': row[3],
+            'year': row[4],
+            'intro': row[5],
+            'hidden': row[6],
+            'content': open(row[3], 'r').read()
 
-            })
+        })
 
     except:
         return create_res_obj({'traceback': traceback.format_exc(), 'msg': "{} {}".format(e.message, e.args)},
