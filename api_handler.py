@@ -633,7 +633,7 @@ def res_query(query):
             if k == 'stoppedword':
                 ast_list = create_ast_list([])
             else:
-                doc_list = get_doc_list_by_term(k, hidden_files)
+                doc_list = get_doc_list_by_term(k, hidden_files,words_list)
                 ast_list = create_ast_list(doc_list)
             words_dict[k] = ast_list
 
@@ -674,7 +674,7 @@ def create_ast_list(num_list):
     return l
 
 
-def get_doc_list_by_term(term, hidden_files):
+def get_doc_list_by_term(term, hidden_files,words_list):
     postid = None
     term = term.replace('*', '%')
     doc_list = []
@@ -688,6 +688,9 @@ def get_doc_list_by_term(term, hidden_files):
         for row in cursor:
             post_ids.append(row[0])
             new_words.append(row[1])
+        for word in new_words:
+            if word not in words_list:
+                words_list.append(word)
         # ret = cursor.fetchone()
         # postid = ret[0]
         # cursor.fetchall()
