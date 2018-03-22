@@ -1,0 +1,1395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/api_handler.py" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a6cf3263-f802-432f-88ed-9265abc19187" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api.py" afterPath="$PROJECT_DIR$/api.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api_handler.py" afterPath="$PROJECT_DIR$/api_handler.py" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/DataRetrieval$api_handler.coverage" NAME="api_handler Coverage Results" MODIFIED="1520700388872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DataRetrieval$sandbox.coverage" NAME="sandbox Coverage Results" MODIFIED="1521386360495" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
+    <SUITE FILE_PATH="coverage/DataRetrieval$indexing.coverage" NAME="indexing Coverage Results" MODIFIED="1519422537339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DataRetrieval$api.coverage" NAME="api Coverage Results" MODIFIED="1521676869445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="api.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="383">
+              <caret line="159" column="47" lean-forward="false" selection-start-line="159" selection-start-column="47" selection-end-line="159" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="api_handler.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/api_handler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="994" column="27" lean-forward="true" selection-start-line="994" selection-start-column="27" selection-end-line="994" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#22#0" expanded="true" />
+                <marker date="1521677287845" expanded="true" signature="3315:3344" ph="DROP TABLE f... " />
+                <marker date="1521677287845" expanded="true" signature="3315:3345" ph="DROP TABLE f... " />
+                <marker date="1521677287845" expanded="true" signature="3526:3550" ph="DELETE FROM " />
+                <marker date="1521677287845" expanded="true" signature="3611:3632" ph="DELETE FROM " />
+                <marker date="1521677287845" expanded="true" signature="3693:3720" ph="DELETE FROM " />
+                <marker date="1521677287845" expanded="true" signature="3781:3822" ph="INSERT INTO Indextable... " />
+                <marker date="1521677287845" expanded="true" signature="3883:3921" ph="ALTER TABLE doc_tbl... " />
+                <marker date="1521677287845" expanded="true" signature="3982:4026" ph="ALTER TABLE postfiletable... " />
+                <marker date="1521677287845" expanded="true" signature="4087:4113" ph="DELETE FROM " />
+                <marker date="1521677287845" expanded="true" signature="7951:7993" ph="SELECT docid... doc_tbl" />
+                <marker date="1521677287845" expanded="true" signature="8635:8677" ph="SELECT docid... doc_tbl" />
+                <marker date="1521677287845" expanded="true" signature="9009:9056" ph="SELECT posti... Indextable" />
+                <marker date="1521677287845" expanded="true" signature="10019:10069" ph="insert into Indextable... " />
+                <marker date="1521677287845" expanded="true" signature="10209:10252" ph="SELECT posti... Indextable" />
+                <marker date="1521677287845" expanded="true" signature="10672:10737" ph="insert into Indextable... " />
+                <marker date="1521677287845" expanded="true" signature="10672:10739" ph="UPDATE `inde... " />
+                <marker date="1521677287845" expanded="true" signature="10972:11040" ph="insert into postfiletable... " />
+                <marker date="1521677287845" expanded="true" signature="11390:11429" ph="SELECT docid... doc_tbl" />
+                <marker date="1521677287845" expanded="true" signature="11636:11733" ph="insert into Indextable... " />
+                <marker date="1521677287845" expanded="true" signature="11869:11908" ph="SELECT docid... doc_tbl" />
+                <marker date="1521677287845" expanded="true" signature="12194:12224" ph="SELECT docid... hidden_files" />
+                <marker date="1521677287845" expanded="true" signature="12625:12665" ph="SELECT hit F... indextable" />
+                <marker date="1521677287845" expanded="true" signature="12971:13018" ph="SELECT posti... postfiletable" />
+                <marker date="1521677287845" expanded="true" signature="13187:13235" ph="SELECT posti... postfiletable" />
+                <marker date="1521677287845" expanded="true" signature="13454:13497" ph="SELECT posti... indextable" />
+                <marker date="1521677287845" expanded="true" signature="13905:13950" ph="SELECT hit F... postfiletable" />
+                <marker date="1521677287845" expanded="true" signature="13905:13964" ph="SELECT hit F... postfiletable" />
+                <marker date="1521677287845" expanded="true" signature="22670:22723" ph="SELECT פםדאן... doc_tbl" />
+                <marker date="1521677287845" expanded="true" signature="23338:23385" ph="SELECT docid... postfiletable" />
+                <marker date="1521677287845" expanded="true" signature="24051:24131" ph="SELECT ג,hit... Indextable" />
+                <marker date="1521677287845" expanded="true" signature="25379:25420" ph="SELECT path doc_tbl" />
+                <marker date="1521677287845" expanded="true" signature="25543:25580" ph="SELECT docid... doc_tbl" />
+                <marker date="1521677287845" expanded="true" signature="25543:25582" ph="SELECT docid... doc_tbl" />
+                <marker date="1521677287845" expanded="true" signature="25543:25584" ph="SELECT docid... doc_tbl" />
+                <marker date="1521677287845" expanded="true" signature="25703:25750" ph="SELECT posti... postfiletable" />
+                <marker date="1521677287845" expanded="true" signature="25936:25978" ph="SELECT hit F... indextable" />
+                <marker date="1521677287845" expanded="true" signature="26140:26178" ph="DELETE FROM " />
+                <marker date="1521677287845" expanded="true" signature="26368:26435" ph="UPDATE `inde... " />
+                <marker date="1521677287845" expanded="true" signature="26586:26626" ph="SELECT docid... postfiletable" />
+                <marker date="1521677287845" expanded="true" signature="26707:26741" ph="DELETE FROM " />
+                <marker date="1521677287845" expanded="true" signature="26822:26861" ph="DELETE FROM " />
+                <marker date="1521677287845" expanded="true" signature="28382:28424" ph="SELECT docid... doc_tbl" />
+                <marker date="1521677287845" expanded="true" signature="28545:28588" ph="SELECT * FRO... hidden_files" />
+                <marker date="1521677287845" expanded="true" signature="28808:28852" ph="INSERT INTO hidden_files... " />
+                <marker date="1521677287845" expanded="true" signature="28945:28991" ph="UPDATE doc_t... " />
+                <marker date="1521677287845" expanded="true" signature="29578:29599" ph="SELECT * FRO... doc_tbl" />
+                <marker date="1521677287845" expanded="true" signature="30357:30399" ph="SELECT docid... doc_tbl" />
+                <marker date="1521677287845" expanded="true" signature="30520:30563" ph="SELECT * FRO... hidden_files" />
+                <marker date="1521677287845" expanded="true" signature="30783:30824" ph="INSERT INTO hidden_files... " />
+                <marker date="1521677287845" expanded="true" signature="30917:30963" ph="UPDATE doc_t... " />
+                <marker date="1521677287845" expanded="true" signature="31514:31552" ph="SELECT * FRO... doc_tbl" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ast.py" pinned="false" current-in-tab="false">
+        <entry file="file:///anaconda/lib/python2.7/ast.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="240" column="0" lean-forward="false" selection-start-line="240" selection-start-column="0" selection-end-line="240" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="conf.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="oldquery.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/oldquery.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="26" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>fetchall</find>
+      <find>create_res_obj</find>
+      <find>button</find>
+      <find>file is already indexd</find>
+      <find>twas</find>
+      <find>docx</find>
+      <find>join</find>
+      <find>except</find>
+      <find>update_words_to_db</find>
+      <find>startswith</find>
+      <find>insert</find>
+      <find>INSERT</find>
+      <find>INSERT INTO</find>
+      <find>content</find>
+      <find>span</find>
+      <find>UPDATE</find>
+      <find>doc_tbl</find>
+      <find>append</find>
+      <find>ret</find>
+      <find>cursor</find>
+      <find>print</find>
+      <find>דאשרא\</find>
+      <find>start</find>
+      <find>starts</find>
+      <find>#</find>
+      <find>in cu</find>
+      <find>Z</find>
+      <find>sub</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Yogev Heskia &lt;yogev911@gmail.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="phpShift" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/templates/admin.php" />
+        <option value="$PROJECT_DIR$/DataBaseUtil.php" />
+        <option value="$PROJECT_DIR$/admin.php" />
+        <option value="$PROJECT_DIR$/upload.php" />
+        <option value="$PROJECT_DIR$/indexing.py" />
+        <option value="$PROJECT_DIR$/doc1.txt" />
+        <option value="$PROJECT_DIR$/upload.html" />
+        <option value="$PROJECT_DIR$/uploads/bla.txt" />
+        <option value="$PROJECT_DIR$/uploads/anotherfile.txt" />
+        <option value="$PROJECT_DIR$/uploads/doc3.txt" />
+        <option value="$PROJECT_DIR$/uploads/doc4.txt" />
+        <option value="$PROJECT_DIR$/uploads/doc5.txt" />
+        <option value="$PROJECT_DIR$/utils/test.json" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/uploads/doc6.txt" />
+        <option value="$PROJECT_DIR$/uploads/doc7.txt" />
+        <option value="$PROJECT_DIR$/templates/upload.html" />
+        <option value="$PROJECT_DIR$/templates/delete.html" />
+        <option value="$PROJECT_DIR$/uploads/zaz.txt" />
+        <option value="$PROJECT_DIR$/uploads/xaxa.txt" />
+        <option value="$PROJECT_DIR$/static/xaxa.txt" />
+        <option value="$PROJECT_DIR$/static/A FIT OF RHYME AGAINST RHYME.txt" />
+        <option value="$PROJECT_DIR$/static/anotherfile.txt" />
+        <option value="$PROJECT_DIR$/static/AT THE OLD LADIES' HOME.txt" />
+        <option value="$PROJECT_DIR$/static/BESSIES SONG TO HER DOLL.txt" />
+        <option value="$PROJECT_DIR$/static/bla.txt" />
+        <option value="$PROJECT_DIR$/static/doc1.txt" />
+        <option value="$PROJECT_DIR$/static/doc2.txt" />
+        <option value="$PROJECT_DIR$/static/doc3.txt" />
+        <option value="$PROJECT_DIR$/static/doc4.txt" />
+        <option value="$PROJECT_DIR$/static/doc5.txt" />
+        <option value="$PROJECT_DIR$/static/doc6.txt" />
+        <option value="$PROJECT_DIR$/static/doc7.txt" />
+        <option value="$PROJECT_DIR$/static/NASEBY.txt" />
+        <option value="$PROJECT_DIR$/static/OLD AGE.txt" />
+        <option value="$PROJECT_DIR$/static/PALINODE.txt" />
+        <option value="$PROJECT_DIR$/static/THE BATTLE OF NEW ORLEANS.txt" />
+        <option value="$PROJECT_DIR$/static/THE BEACON FIRES.txt" />
+        <option value="$PROJECT_DIR$/static/THE EVE OF WATERLOO.txt" />
+        <option value="$PROJECT_DIR$/static/THE LITTLE BLACK-EYED REBEL.txt" />
+        <option value="$PROJECT_DIR$/static/THE MANLET.txt" />
+        <option value="$PROJECT_DIR$/static/TO A LADY WHO SPOKE SLIGHTINGLY OF POETS.txt" />
+        <option value="$PROJECT_DIR$/static/TO MY DEAR AND LOVING HUSBAND.txt" />
+        <option value="$PROJECT_DIR$/uploads/1520711940xaxa.txt" />
+        <option value="/a.dummy" />
+        <option value="$PROJECT_DIR$/utils/oldquery.py" />
+        <option value="$PROJECT_DIR$/utils/sandbox.py" />
+        <option value="$PROJECT_DIR$/utils/dataretrieval.sql" />
+        <option value="$PROJECT_DIR$/conf.py" />
+        <option value="$PROJECT_DIR$/api.py" />
+        <option value="$PROJECT_DIR$/api_handler.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="-1920" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>CSS</id>
+          </State>
+          <State>
+            <id>Data flow issuesJavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>Naming conventionsJavaScript</id>
+          </State>
+          <State>
+            <id>Probable bugsJavaScript</id>
+          </State>
+          <State>
+            <id>TypeScript</id>
+          </State>
+        </expanded-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="DataRetrieval" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DataRetrieval" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DataRetrieval" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DataRetrieval" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DataRetrieval" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DataRetrieval" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="/anaconda/bin/python2.7" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.selected.package.standard" value="" />
+  </component>
+  <component name="PyCoverageOptionsProvider">
+    <option name="myUseBundledCoveragePy" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tmp" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/utils" />
+      <recent name="$PROJECT_DIR$/uploads" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/uploads" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/utils" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.api">
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+    </configuration>
+    <configuration default="true" type="CodeceptionConfigurationType" factoryName="Codeception">
+      <PhpTestRunnerSettings />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpSpecConfigurationType" factoryName="PHPSpec">
+      <PhpTestRunnerSettings />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+    <configuration name="api" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="DataRetrieval" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/api.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="api_handler" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="DataRetrieval" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/api_handler.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="indexing" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="DataRetrieval" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/indexing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="sandbox" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="DataRetrieval" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/sandbox.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="Python.indexing" />
+      <item index="1" class="java.lang.String" itemvalue="Python.api" />
+      <item index="2" class="java.lang.String" itemvalue="Python.sandbox" />
+      <item index="3" class="java.lang.String" itemvalue="Python.api_handler" />
+    </list>
+    <recent_temporary>
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Python.api" />
+        <item index="1" class="java.lang.String" itemvalue="Python.sandbox" />
+        <item index="2" class="java.lang.String" itemvalue="Python.api_handler" />
+        <item index="3" class="java.lang.String" itemvalue="Python.indexing" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a6cf3263-f802-432f-88ed-9265abc19187" name="Default" comment="" />
+      <created>1518813290484</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1518813290484</updated>
+      <workItem from="1518876518158" duration="6955000" />
+    </task>
+    <task id="LOCAL-00001" summary="init project">
+      <created>1518813725131</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1518813725131</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added utils file">
+      <created>1518863461035</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1518863461035</updated>
+    </task>
+    <task id="LOCAL-00003" summary="..">
+      <created>1518870567114</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1518870567114</updated>
+    </task>
+    <task id="LOCAL-00004" summary=".">
+      <created>1518870711565</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1518870711565</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added index file">
+      <created>1518877660465</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1518877660465</updated>
+    </task>
+    <task id="LOCAL-00006" summary="filess">
+      <created>1518887343266</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1518887343266</updated>
+    </task>
+    <task id="LOCAL-00007" summary="working on api, upload and index">
+      <created>1519166321764</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1519166321764</updated>
+    </task>
+    <task id="LOCAL-00008" summary="working on api, upload and index">
+      <created>1519422700593</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1519422700593</updated>
+    </task>
+    <task id="LOCAL-00009" summary="working on api, upload and index">
+      <created>1519429295183</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1519429295183</updated>
+    </task>
+    <task id="LOCAL-00010" summary="working on api, upload and index">
+      <created>1519600153135</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1519600153135</updated>
+    </task>
+    <task id="LOCAL-00011" summary="working on api, upload and index">
+      <created>1519917462752</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1519917462752</updated>
+    </task>
+    <task id="LOCAL-00012" summary="working on api, upload and index">
+      <created>1520089470663</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1520089470663</updated>
+    </task>
+    <task id="LOCAL-00013" summary="working on api, upload and index">
+      <created>1520089579517</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1520089579517</updated>
+    </task>
+    <task id="LOCAL-00014" summary="working on api, upload and index">
+      <created>1520091306189</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1520091306189</updated>
+    </task>
+    <task id="LOCAL-00015" summary="working on api, upload and index">
+      <created>1520092175369</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1520092175369</updated>
+    </task>
+    <task id="LOCAL-00016" summary="working on api, serch query works!">
+      <created>1520286148105</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1520286148105</updated>
+    </task>
+    <task id="LOCAL-00017" summary="working on api, serch query works!">
+      <created>1520286293243</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1520286293243</updated>
+    </task>
+    <task id="LOCAL-00018" summary="working on api, serch query works!">
+      <created>1520289543045</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1520289543045</updated>
+    </task>
+    <task id="LOCAL-00019" summary="working on api, serch query works!">
+      <created>1520463682686</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1520463682686</updated>
+    </task>
+    <task id="LOCAL-00020" summary="working on api, serch query works!">
+      <created>1520470246422</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1520470246422</updated>
+    </task>
+    <task id="LOCAL-00021" summary="working on api, serch query works!">
+      <created>1520514145012</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1520514145012</updated>
+    </task>
+    <task id="LOCAL-00022" summary="interfacing with ui">
+      <created>1520698260444</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1520698260444</updated>
+    </task>
+    <task id="LOCAL-00023" summary="adding txt files.&#10;adding sql init file">
+      <created>1520700521430</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1520700521430</updated>
+    </task>
+    <task id="LOCAL-00024" summary="adding&#10;#Author name : Yogev Heskia&#10;#Year : 2019&#10;#Intro : sdfbdsfb sdgfbdgh bla bladsfgdsfg">
+      <created>1520702913168</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1520702913168</updated>
+    </task>
+    <task id="LOCAL-00025" summary="added listener for files">
+      <created>1520705422951</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1520705422951</updated>
+    </task>
+    <task id="LOCAL-00026" summary="listener works, &#10;any files dropped in tmp folder will index">
+      <created>1520706673515</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1520706673515</updated>
+    </task>
+    <task id="LOCAL-00027" summary="working on new way to parse query">
+      <created>1520724587164</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1520724587164</updated>
+    </task>
+    <task id="LOCAL-00028" summary="working on new way to parse query">
+      <created>1521319085219</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1521319085219</updated>
+    </task>
+    <task id="LOCAL-00029" summary="working on new way to parse query">
+      <created>1521320589194</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1521320589194</updated>
+    </task>
+    <task id="LOCAL-00030" summary="working on new way to parse query - DONE&#10;added restore route">
+      <created>1521387535268</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1521387535268</updated>
+    </task>
+    <task id="LOCAL-00031" summary="working on new way to parse query - DONE&#10;added restore route">
+      <created>1521387771768</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1521387771768</updated>
+    </task>
+    <task id="LOCAL-00032" summary="working on new way to parse query - DONE&#10;added restore route">
+      <created>1521391616227</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1521391616227</updated>
+    </task>
+    <task id="LOCAL-00033" summary="&#10;added hidden in file_tbl">
+      <created>1521393802845</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1521393802845</updated>
+    </task>
+    <task id="LOCAL-00034" summary="hidden file fix - db">
+      <created>1521396214851</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1521396214851</updated>
+    </task>
+    <task id="LOCAL-00035" summary="return docid for each new doc. &#10;sql changed names to varchar 250 insted of 30.&#10;conf set localhost as api host.">
+      <created>1521500361664</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1521500361664</updated>
+    </task>
+    <task id="LOCAL-00036" summary="added getfile route">
+      <created>1521570192980</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1521570192980</updated>
+    </task>
+    <task id="LOCAL-00037" summary="fix query">
+      <created>1521583995284</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1521583995284</updated>
+    </task>
+    <task id="LOCAL-00038" summary="fix intro to return empty string if no intro entered">
+      <created>1521586161029</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1521586161029</updated>
+    </task>
+    <task id="LOCAL-00039" summary="fixed restored file bug">
+      <created>1521586878240</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1521586878240</updated>
+    </task>
+    <task id="LOCAL-00040" summary="listener fix">
+      <created>1521587655958</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1521587655958</updated>
+    </task>
+    <task id="LOCAL-00041" summary="deleted the dam file...">
+      <created>1521588031508</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1521588031508</updated>
+    </task>
+    <task id="LOCAL-00042" summary="deleted the dam file...">
+      <created>1521664219571</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1521664219571</updated>
+    </task>
+    <task id="LOCAL-00043" summary="super wild card!">
+      <created>1521673055998</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1521673055998</updated>
+    </task>
+    <task id="LOCAL-00044" summary="super wild card!">
+      <created>1521676147777</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1521676147777</updated>
+    </task>
+    <task id="LOCAL-00045" summary="end, broken">
+      <created>1521723976331</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1521723976331</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="6955000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-1920" y="0" width="1920" height="1080" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3592233" sideWeight="0.4328125" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.311" sideWeight="0.48177084" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3145631" sideWeight="0.49761903" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11510417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3592233" sideWeight="0.5671875" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added utils file" />
+    <MESSAGE value=".." />
+    <MESSAGE value="." />
+    <MESSAGE value="added index file" />
+    <MESSAGE value="filess" />
+    <MESSAGE value="working on api, upload and index" />
+    <MESSAGE value="working on api, serch query works!" />
+    <MESSAGE value="interfacing with ui" />
+    <MESSAGE value="adding txt files.&#10;adding sql init file" />
+    <MESSAGE value="adding&#10;#Author name : Yogev Heskia&#10;#Year : 2019&#10;#Intro : sdfbdsfb sdgfbdgh bla bladsfgdsfg" />
+    <MESSAGE value="added listener for files" />
+    <MESSAGE value="listener works, &#10;any files dropped in tmp folder will index" />
+    <MESSAGE value="working on new way to parse query" />
+    <MESSAGE value="working on new way to parse query - DONE&#10;added restore route" />
+    <MESSAGE value="&#10;added hidden in file_tbl" />
+    <MESSAGE value="hidden file fix - db" />
+    <MESSAGE value="return docid for each new doc. &#10;sql changed names to varchar 250 insted of 30.&#10;conf set localhost as api host." />
+    <MESSAGE value="added getfile route" />
+    <MESSAGE value="fix query" />
+    <MESSAGE value="fix intro to return empty string if no intro entered" />
+    <MESSAGE value="fixed restored file bug" />
+    <MESSAGE value="listener fix" />
+    <MESSAGE value="deleted the dam file..." />
+    <MESSAGE value="super wild card!" />
+    <MESSAGE value="end, broken" />
+    <option name="LAST_COMMIT_MESSAGE" value="end, broken" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/utils/sandbox.py</url>
+          <line>118</line>
+          <option name="timeStamp" value="146" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api_handler.py</url>
+          <line>963</line>
+          <option name="timeStamp" value="215" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api_handler.py</url>
+          <line>155</line>
+          <option name="timeStamp" value="217" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api_handler.py</url>
+          <line>162</line>
+          <option name="timeStamp" value="218" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api_handler.py</url>
+          <line>157</line>
+          <option name="timeStamp" value="219" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api_handler.py</url>
+          <line>684</line>
+          <option name="timeStamp" value="222" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api_handler.py</url>
+          <line>672</line>
+          <option name="timeStamp" value="245" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api_handler.py</url>
+          <line>667</line>
+          <option name="timeStamp" value="246" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api_handler.py</url>
+          <line>669</line>
+          <option name="timeStamp" value="247" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api_handler.py</url>
+          <line>517</line>
+          <option name="timeStamp" value="248" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api_handler.py</url>
+          <line>645</line>
+          <option name="timeStamp" value="250" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api_handler.py</url>
+          <line>701</line>
+          <option name="timeStamp" value="252" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api_handler.py</url>
+          <line>715</line>
+          <option name="timeStamp" value="253" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="254" />
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="wcard_words_dict" />
+        <watch expression="words_dict" />
+        <watch expression="new_query" />
+        <watch expression="text" />
+        <watch expression="text.split()" language="Python" />
+        <watch expression="text.replace('(','').replace(')','').split()" language="Python" />
+        <watch expression="tmp_query" />
+        <watch expression="query" language="Python" />
+        <watch expression="word" />
+        <watch expression="term" />
+        <watch expression="query[quotes_words_indexs[0][0]]" language="Python" />
+        <watch expression="quotes_words_indexs" language="Python" />
+        <watch expression="tup[0]" language="Python" />
+        <watch expression="query[tup[0]]" language="Python" />
+        <watch expression="query[tup[0] - 1]" language="Python" />
+        <watch expression="post_ids" />
+        <watch expression="words_dict" />
+        <watch expression="traceback.format_exc()" language="Python" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/utils/test.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="34" column="3" lean-forward="false" selection-start-line="29" selection-start-column="11" selection-end-line="34" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="43" lean-forward="false" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/upload.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="11" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="15" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Python/2.7/site-packages/flask/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="1597" column="0" lean-forward="false" selection-start-line="1597" selection-start-column="0" selection-end-line="1597" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/posixpath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-899">
+          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uploads/1520559612doc5.txt" />
+    <entry file="file://$PROJECT_DIR$/uploads/1520559612doc4.txt" />
+    <entry file="file://$PROJECT_DIR$/uploads/1520559612doc3.txt" />
+    <entry file="file://$PROJECT_DIR$/uploads/1520559611BESSIES_SONG_TO_HER_DOLL.txt" />
+    <entry file="file://$PROJECT_DIR$/utils/indexing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uploads/1520611034Procfile" />
+    <entry file="file:///anaconda/lib/python2.7/site-packages/flask/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="1597" column="0" lean-forward="false" selection-start-line="1597" selection-start-column="0" selection-end-line="1597" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="1025" column="0" lean-forward="false" selection-start-line="1025" selection-start-column="0" selection-end-line="1025" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/xaxa.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/A FIT OF RHYME AGAINST RHYME.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/anotherfile.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/AT THE OLD LADIES' HOME.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/BESSIES SONG TO HER DOLL.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="19" lean-forward="false" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/bla.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="20" lean-forward="false" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/doc1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/doc2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="20" lean-forward="false" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/doc3.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/doc4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/doc5.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/doc6.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/doc7.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/NASEBY.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/OLD AGE.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/PALINODE.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/THE BEACON FIRES.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/THE EVE OF WATERLOO.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/THE LITTLE BLACK-EYED REBEL.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/THE MANLET.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/TO A LADY WHO SPOKE SLIGHTINGLY OF POETS.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/TO MY DEAR AND LOVING HUSBAND.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tmp/doc4.txt" />
+    <entry file="file://$PROJECT_DIR$/tmp/THE MANLET.txt" />
+    <entry file="file://$PROJECT_DIR$/tmp/TO MY DEAR AND LOVING HUSBAND.txt" />
+    <entry file="file://$PROJECT_DIR$/uploads/1520711940xaxa.txt" />
+    <entry file="file://$PROJECT_DIR$/utils/dataretrieval.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="22" lean-forward="false" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+          <folding>
+            <marker date="1521500234963" expanded="true" signature="2474:2536" ph="/*!40101 SET... " />
+            <marker date="1521500234963" expanded="true" signature="2538:2602" ph="/*!40101 SET... " />
+            <marker date="1521500234963" expanded="true" signature="2604:2666" ph="/*!40101 SET... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda/lib/python2.7/socket.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3360">
+          <caret line="227" column="0" lean-forward="false" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/sandbox.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1920">
+          <caret line="128" column="53" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="128" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#11#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tmp/AT THE OLD LADIES' HOME.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/THE BATTLE OF NEW ORLEANS.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda/lib/python2.7/ast.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="240" column="0" lean-forward="false" selection-start-line="240" selection-start-column="0" selection-end-line="240" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/oldquery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="26" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="159" column="47" lean-forward="false" selection-start-line="159" selection-start-column="47" selection-end-line="159" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api_handler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="994" column="27" lean-forward="true" selection-start-line="994" selection-start-column="27" selection-end-line="994" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+            <marker date="1521677287845" expanded="true" signature="3315:3344" ph="DROP TABLE f... " />
+            <marker date="1521677287845" expanded="true" signature="3315:3345" ph="DROP TABLE f... " />
+            <marker date="1521677287845" expanded="true" signature="3526:3550" ph="DELETE FROM " />
+            <marker date="1521677287845" expanded="true" signature="3611:3632" ph="DELETE FROM " />
+            <marker date="1521677287845" expanded="true" signature="3693:3720" ph="DELETE FROM " />
+            <marker date="1521677287845" expanded="true" signature="3781:3822" ph="INSERT INTO Indextable... " />
+            <marker date="1521677287845" expanded="true" signature="3883:3921" ph="ALTER TABLE doc_tbl... " />
+            <marker date="1521677287845" expanded="true" signature="3982:4026" ph="ALTER TABLE postfiletable... " />
+            <marker date="1521677287845" expanded="true" signature="4087:4113" ph="DELETE FROM " />
+            <marker date="1521677287845" expanded="true" signature="7951:7993" ph="SELECT docid... doc_tbl" />
+            <marker date="1521677287845" expanded="true" signature="8635:8677" ph="SELECT docid... doc_tbl" />
+            <marker date="1521677287845" expanded="true" signature="9009:9056" ph="SELECT posti... Indextable" />
+            <marker date="1521677287845" expanded="true" signature="10019:10069" ph="insert into Indextable... " />
+            <marker date="1521677287845" expanded="true" signature="10209:10252" ph="SELECT posti... Indextable" />
+            <marker date="1521677287845" expanded="true" signature="10672:10737" ph="insert into Indextable... " />
+            <marker date="1521677287845" expanded="true" signature="10672:10739" ph="UPDATE `inde... " />
+            <marker date="1521677287845" expanded="true" signature="10972:11040" ph="insert into postfiletable... " />
+            <marker date="1521677287845" expanded="true" signature="11390:11429" ph="SELECT docid... doc_tbl" />
+            <marker date="1521677287845" expanded="true" signature="11636:11733" ph="insert into Indextable... " />
+            <marker date="1521677287845" expanded="true" signature="11869:11908" ph="SELECT docid... doc_tbl" />
+            <marker date="1521677287845" expanded="true" signature="12194:12224" ph="SELECT docid... hidden_files" />
+            <marker date="1521677287845" expanded="true" signature="12625:12665" ph="SELECT hit F... indextable" />
+            <marker date="1521677287845" expanded="true" signature="12971:13018" ph="SELECT posti... postfiletable" />
+            <marker date="1521677287845" expanded="true" signature="13187:13235" ph="SELECT posti... postfiletable" />
+            <marker date="1521677287845" expanded="true" signature="13454:13497" ph="SELECT posti... indextable" />
+            <marker date="1521677287845" expanded="true" signature="13905:13950" ph="SELECT hit F... postfiletable" />
+            <marker date="1521677287845" expanded="true" signature="13905:13964" ph="SELECT hit F... postfiletable" />
+            <marker date="1521677287845" expanded="true" signature="22670:22723" ph="SELECT פםדאן... doc_tbl" />
+            <marker date="1521677287845" expanded="true" signature="23338:23385" ph="SELECT docid... postfiletable" />
+            <marker date="1521677287845" expanded="true" signature="24051:24131" ph="SELECT ג,hit... Indextable" />
+            <marker date="1521677287845" expanded="true" signature="25379:25420" ph="SELECT path doc_tbl" />
+            <marker date="1521677287845" expanded="true" signature="25543:25580" ph="SELECT docid... doc_tbl" />
+            <marker date="1521677287845" expanded="true" signature="25543:25582" ph="SELECT docid... doc_tbl" />
+            <marker date="1521677287845" expanded="true" signature="25543:25584" ph="SELECT docid... doc_tbl" />
+            <marker date="1521677287845" expanded="true" signature="25703:25750" ph="SELECT posti... postfiletable" />
+            <marker date="1521677287845" expanded="true" signature="25936:25978" ph="SELECT hit F... indextable" />
+            <marker date="1521677287845" expanded="true" signature="26140:26178" ph="DELETE FROM " />
+            <marker date="1521677287845" expanded="true" signature="26368:26435" ph="UPDATE `inde... " />
+            <marker date="1521677287845" expanded="true" signature="26586:26626" ph="SELECT docid... postfiletable" />
+            <marker date="1521677287845" expanded="true" signature="26707:26741" ph="DELETE FROM " />
+            <marker date="1521677287845" expanded="true" signature="26822:26861" ph="DELETE FROM " />
+            <marker date="1521677287845" expanded="true" signature="28382:28424" ph="SELECT docid... doc_tbl" />
+            <marker date="1521677287845" expanded="true" signature="28545:28588" ph="SELECT * FRO... hidden_files" />
+            <marker date="1521677287845" expanded="true" signature="28808:28852" ph="INSERT INTO hidden_files... " />
+            <marker date="1521677287845" expanded="true" signature="28945:28991" ph="UPDATE doc_t... " />
+            <marker date="1521677287845" expanded="true" signature="29578:29599" ph="SELECT * FRO... doc_tbl" />
+            <marker date="1521677287845" expanded="true" signature="30357:30399" ph="SELECT docid... doc_tbl" />
+            <marker date="1521677287845" expanded="true" signature="30520:30563" ph="SELECT * FRO... hidden_files" />
+            <marker date="1521677287845" expanded="true" signature="30783:30824" ph="INSERT INTO hidden_files... " />
+            <marker date="1521677287845" expanded="true" signature="30917:30963" ph="UPDATE doc_t... " />
+            <marker date="1521677287845" expanded="true" signature="31514:31552" ph="SELECT * FRO... doc_tbl" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
