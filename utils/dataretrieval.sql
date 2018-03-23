@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 03, 2018 at 04:05 PM
+-- Generation Time: Mar 18, 2018 at 06:22 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -30,9 +30,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `doc_tbl` (
   `docid` int(11) NOT NULL,
-  `docname` varchar(30) NOT NULL,
-  `author` varchar(30) NOT NULL,
-  `path` varchar(250) NOT NULL
+  `docname` varchar(250) NOT NULL,
+  `author` varchar(250) NOT NULL,
+  `path` varchar(250) NOT NULL,
+  `year` varchar(250) NOT NULL,
+  `intro` varchar(250) NOT NULL,
+  `hidden` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hidden_files`
+--
+
+CREATE TABLE `hidden_files` (
+  `docid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
